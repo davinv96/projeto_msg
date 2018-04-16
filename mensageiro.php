@@ -1,7 +1,7 @@
 <?php
     include_once('banco/conecta.php');
     session_start();
-
+    
     //Verifica se usuário se logou corretamente
     if(isset($_SESSION['id_usuario'])){
         $id_usuario = $_SESSION['id_usuario'];
