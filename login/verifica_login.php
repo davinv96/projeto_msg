@@ -14,7 +14,10 @@
 
             if(mysqli_num_rows($query) == 1){              
                 $fetch = mysqli_fetch_assoc($query);
-                echo "Login feito com sucesso!";
+                session_start();
+                $_SESSION['id_usuario'] = $fetch['id_usuario'];
+                $_SESSION['nome'] = $fetch['nome'];
+                header("Location: mensageiro.php");
             }else{
                 echo "Erro de login";
             }

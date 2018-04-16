@@ -27,6 +27,4 @@
         $login = $_POST["login"];
         verifica_login($login);
     }
-   
-
 ?>
