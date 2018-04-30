@@ -1,21 +1,28 @@
 $(document).ready(function(){
+
     $("#reply").on("click", function(){
-        var message = $.trim($("#message").val()),
-        conversation_id = $.trim($("#id_conversa").val()),
-        user_form = $.trim($("#usuario_envio").val()),
-        user_to = $.trim($("#usuario_destino").val()),
-        error = $("#error");
-        if((message != "") && (conversation_id != "") && (user_form != "") && (user_to != "")){
-            error.text("Sending...");
-            $.post("enviar_mensagem.php",{message:message,conversation_id:conversation_id,user_form:user_form,user_to:user_to}, function(data){
-                error.text(data);
-                $("#message").val("");
+        var mensagem = $.trim($("#mensagem").val()),
+            id_conversa = $.trim($("#id_conversa").val()),
+            usuario_envio_msg = $.trim($("#usuario_envio_msg").val()),
+            usuario_destino = $.trim($("#usuario_destino").val()),
+            erro = $("#erro");
+ 
+        if((mensagem != "") && (id_conversa != "") && (usuario_envio_msg != "") && (usuario_destino != "")){
+            erro.text("Enviando...");
+            $.post("enviar_msg.php",{mensagem:mensagem,id_conversa:id_conversa,usuario_envio_msg:usuario_envio_msg,usuario_destino:usuario_destino}, function(data){
+                erro.text(data);
+                $("#mensagem").val("");
             });
         }
     });
-    c_id = $("#conversation_id").val();
+ 
+ 
+    
+    c_id = $("#id_conversa").val();
+	
     setInterval(function(){
-    $(".display-message").load("obter_mensagens?c_id="+c_id);
-    }, 2000);
+        $(".display-message").load("obter_msg.php?c_id="+c_id);
+    }, 1000);
+ 
     $(".display-message").scrollTop($(".display-message")[0].scrollHeight);
 });
