@@ -42,7 +42,7 @@ $con = conectar();
             <div class="form-group">
                 <input required type="password" class="form-control" name="senha">
             </div>
-            <input type="submit" value="login"  name="login" class="btn btn-primary btn-block">
+            <input type="submit" value="Entrar"  name="login" class="btn btn-primary btn-block">
         </form>
       
     </div>
