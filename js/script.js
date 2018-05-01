@@ -33,5 +33,5 @@ $(document).ready(function(){
 $(document).ready(function(){
     setInterval(function() {
         $("#bs-example-navbar-collapse-1").load("interface.php #bs-example-navbar-collapse-1");
-    }, 1000);
+    }, 5000);
 });
