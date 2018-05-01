@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-    $("#reply").on("click", function(){
+    $("#enviar").on("click", function(){
         var mensagem = $.trim($("#mensagem").val()),
             id_conversa = $.trim($("#id_conversa").val()),
             usuario_envio_msg = $.trim($("#usuario_envio_msg").val()),
@@ -31,11 +31,7 @@ $(document).ready(function(){
     
 });
 $(document).ready(function(){
-    refreshTable();
-  });
-  
-  function refreshTable(){
-      $('#bs-example-navbar-collapse-1').load('interface.php?='+usuario_destino, function(){
-         setTimeout(refreshTable, 1000);
-      });
-  }
+    setInterval(function() {
+        $("#bs-example-navbar-collapse-1").load("interface.php #bs-example-navbar-collapse-1");
+    }, 1000);
+});

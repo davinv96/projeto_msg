@@ -112,7 +112,7 @@
                 <div class="form-group">
                     <textarea class="form-control" id="mensagem" placeholder="Envie sua Mensagem"></textarea>
                 </div>
-                <button class="btn btn-primary" id="reply">Reply</button> 
+                <button class="btn btn-primary" id="enviar">Enviar</button> 
                 <span id="error"></span>
             </div>
             <!-- / send message -->
@@ -121,4 +121,5 @@
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/script.js"></script> 
 </body>
+
 </html>
