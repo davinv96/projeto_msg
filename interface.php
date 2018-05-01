@@ -21,65 +21,65 @@
 ?>
 <!DOCTYPE html>
 <html>
-<head>
-    <title>UlbraChat</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-	  <script src="js/jquery.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-</head>
+    <head>
+        <title>UlbraChat</title>
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+	    <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+    </head>
 
-<body>
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="http://localhost/projeto_msg/interface.php">UlbraChat - Olá, <?php echo $nome; ?></a>
-    </div>
+    <body>
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="http://localhost/projeto_msg/interface.php">UlbraChat - Olá, <?php echo $nome; ?></a>
+                </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-      <li class="nav-item ">
-        <a class="nav-link" href="http://localhost/projeto_msg/logout.php">Sair <span class="sr-only"></span></a>
-      </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contatos <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <?php
-                    $q = mysqli_query($con, "SELECT * FROM `usuarios` WHERE id!='$id_login'");
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li class="nav-item ">
+                        <a class="nav-link" href="http://localhost/projeto_msg/logout.php">Sair <span class="sr-only"></span></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contatos <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<?php
+							$q = mysqli_query($con, "SELECT * FROM `usuarios` WHERE id!='$id_login'");
                     
-                    while($row = mysqli_fetch_assoc($q)){
-                        $status = $row['status'];
-                        if($status == 1){
-                            $status_aux = "Online";
-                        }else{
-                            $status_aux = "Offline";
-                        }
-                        echo "<a href='interface.php?id={$row['id']}'><li>{$row['nome']}<br>Status: $status_aux<hr></li></a>";
-                    }
+							while($row = mysqli_fetch_assoc($q)){
+								$status = $row['status'];
+								if($status == 1){
+									$status_aux = "Online";
+								}else{
+									$status_aux = "Offline";
+								}
+								echo "<a href='interface.php?id={$row['id']}'><li>{$row['nome']}<br>Status: $status_aux<hr></li></a>";
+							}
                 
-                ?>
-          </ul>
-        </li>
-      </ul>
+						?>
+						</ul>
+					</li>
+				</ul>
      
      
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
+			</div><!-- /.navbar-collapse -->
+			</div><!-- /.container-fluid -->
+		</nav>
      
-    <div class="message-body"> 		
-		<div class="display-message">
+		<div class="message-body"> 		
+			<div class="display-message">
             <!-- display message -->
            
-            <?php
+				<?php
                 if(isset($_GET['id'])){
                     $usuario2 = trim(mysqli_real_escape_string($con, $_GET['id']));
                     $q = mysqli_query($con, "SELECT `id` FROM `usuarios` WHERE id='$usuario2' AND id!='$id_login'");
@@ -99,7 +99,7 @@
                 }else {
                     die("<center>Clique na aba contatos com quem deseja falar.</center>");
                 }
-            ?>
+				?>
            
             <!-- /display message -->
 			</div>
@@ -117,9 +117,9 @@
             </div>
             <!-- / send message -->
       
-	</div>
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/script.js"></script> 
-</body>
+		</div>
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/script.js"></script> 
+	</body>
 
 </html>

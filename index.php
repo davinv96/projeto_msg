@@ -11,10 +11,10 @@ $con = conectar();
     <link rel="stylesheet" type="text/css" href="css/style.css">
  
 </head>
-<body style="background:#eee;">
+	<body style="background:#eee;">
     
-    <div class="login-container">
-        <?php
+		<div class="login-container">
+			<?php
             
             if(isset($_POST['login'])){
                 $nome = trim(mysqli_real_escape_string($con, $_POST['nome']));
@@ -33,19 +33,18 @@ $con = conectar();
                     echo "<div class='alert alert-danger'>Erro de login.</div>";
                 }
             }
-        ?>
-        <h1>Login</h1>
-        <form action="index.php" method="post">
-            <div class="form-group">
-                <input required type="text" class="form-control" name="nome">
-            </div>
-            <div class="form-group">
-                <input required type="password" class="form-control" name="senha">
-            </div>
-            <input type="submit" value="Entrar"  name="login" class="btn btn-primary btn-block">
-        </form>
+			?>
+			<h1>Login</h1>
+			<form action="index.php" method="post">
+				<div class="form-group">
+					<input required type="text" class="form-control" name="nome">
+				</div>
+				<div class="form-group">
+					<input required type="password" class="form-control" name="senha">
+				</div>
+				<input type="submit" value="Entrar"  name="login" class="btn btn-primary btn-block">
+			</form>
       
-    </div>
-    <!-- /login -->
-</body>
+		</div>
+	</body>
 </html>

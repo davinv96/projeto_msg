@@ -1,5 +1,4 @@
 $(document).ready(function(){
-
     $("#enviar").on("click", function(){
         var mensagem = $.trim($("#mensagem").val()),
             id_conversa = $.trim($("#id_conversa").val()),
@@ -16,7 +15,6 @@ $(document).ready(function(){
         }
     });
  
- 
     
     c_id = $("#id_conversa").val();
 	
@@ -30,6 +28,7 @@ $(document).ready(function(){
 
     
 });
+
 $(document).ready(function(){
     setInterval(function() {
         $("#bs-example-navbar-collapse-1").load("interface.php #bs-example-navbar-collapse-1");
