@@ -11,8 +11,13 @@
         header("Location: index.php");
     }
     mysqli_query($con, "UPDATE `usuarios` SET `status`= 1 WHERE `id` ='$id_login'");
-    $q1 = mysqli_query($con, "SELECT `status` FROM `usuarios` WHERE `id`='$id_login'");
-       
+
+    $q1 = mysqli_query($con, "SELECT `nome` FROM `usuarios` WHERE `id`='$id_login'");
+    while($row = mysqli_fetch_assoc($q1)){
+        $nome = $row['nome'];
+    }
+    
+    
 ?>
 <!DOCTYPE html>
 <html>
@@ -35,7 +40,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="http://localhost/projeto_msg/interface.php">UlbraChat</a>
+      <a class="navbar-brand" href="http://localhost/projeto_msg/interface.php">UlbraChat - Olá, <?php echo $nome; ?></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->

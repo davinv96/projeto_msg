@@ -23,6 +23,19 @@ $(document).ready(function(){
     setInterval(function(){
         $(".display-message").load("obter_msg.php?c_id="+c_id);
     }, 1000);
- 
+    
+
     $(".display-message").scrollTop($(".display-message")[0].scrollHeight);
+
+
+    
 });
+$(document).ready(function(){
+    refreshTable();
+  });
+  
+  function refreshTable(){
+      $('#bs-example-navbar-collapse-1').load('interface.php?='+usuario_destino, function(){
+         setTimeout(refreshTable, 1000);
+      });
+  }
