@@ -6,9 +6,13 @@
     
     if(isset($_SESSION['id'])){
         $id_login = $_SESSION['id'];
+       
     }else{
         header("Location: index.php");
     }
+    mysqli_query($con, "UPDATE `usuarios` SET `status`= 1 WHERE `id` ='$id_login'");
+    $q1 = mysqli_query($con, "SELECT `status` FROM `usuarios` WHERE `id`='$id_login'");
+       
 ?>
 <!DOCTYPE html>
 <html>
@@ -47,7 +51,13 @@
                     $q = mysqli_query($con, "SELECT * FROM `usuarios` WHERE id!='$id_login'");
                     
                     while($row = mysqli_fetch_assoc($q)){
-                        echo "<a href='interface.php?id={$row['id']}'><li>{$row['nome']}</li></a>";
+                        $status = $row['status'];
+                        if($status == 1){
+                            $status_aux = "Online";
+                        }else{
+                            $status_aux = "Offline";
+                        }
+                        echo "<a href='interface.php?id={$row['id']}'><li>{$row['nome']}<br>Status: $status_aux<hr></li></a>";
                     }
                 
                 ?>
