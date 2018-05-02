@@ -27,6 +27,7 @@
         <link rel="stylesheet" type="text/css" href="css/style.css">
 	    <script src="js/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/script.js"></script> 
     </head>
 
     <body>
@@ -117,9 +118,7 @@
             </div>
             <!-- / send message -->
       
-		</div>
-		<script type="text/javascript" src="js/jquery.min.js"></script>
-		<script type="text/javascript" src="js/script.js"></script> 
+		</div>		
 	</body>
 
 </html>
