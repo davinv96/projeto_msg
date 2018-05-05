@@ -28,7 +28,7 @@ $con = conectar();
                     session_start();
                     $_SESSION['id'] = $fetch['id'];
                     $_SESSION['nome'] = $fetch['nome'];
-                    header("Location: interface.php");
+                    header("Location: home.php");
                 }else{                   
                     echo "<div class='alert alert-danger'>Erro de login.</div>";
                 }

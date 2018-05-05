@@ -41,7 +41,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="http://localhost/projeto_msg/interface.php">UlbraChat - Olá, <?php echo $nome; ?></a>
+                    <a class="navbar-brand" href="http://localhost/projeto_msg/home.php">UlbraChat - Olá, <?php echo $nome; ?></a>
                    
                 </div>
 
@@ -71,7 +71,7 @@
                 $status="Offline";
             }
                     
-             echo "<a target='_blank' href='mensagem.php?id={$row['id']}'><li>Nome: {$row['nome']} - Status: ".$status;"<hr></li></a>";
+             echo "<a target='_blank' href='mensageiro.php?id={$row['id']}'><li>Nome: {$row['nome']} - Status: ".$status;"<hr></li></a>";
                     
         }
         ?>
