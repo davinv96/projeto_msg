@@ -31,6 +31,6 @@ $(document).ready(function(){
 
 $(document).ready(function(){
     setInterval(function() {
-        $("#bs-example-navbar-collapse-1").load("interface.php #bs-example-navbar-collapse-1");
-    }, 10000);
+        $("#show-contacts").load("interface.php #show-contacts");
+    }, 2000);
 });
