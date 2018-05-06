@@ -31,12 +31,12 @@ $(document).ready(function(){
 
 $(document).ready(function(){
     setInterval(function() {
-        $("#show-contacts").load("interface.php #show-contacts");
+        $("#show-contacts").load("home.php #show-contacts");
     }, 2000);
 });
 
 $(document).ready(function(){
     setInterval(function() {
-        $("#navbar-header").load("mensageiro.php #navbar-header");
+        $("#show-info").load("mensageiro.php #show-info");
     }, 2000);
 });

@@ -12,24 +12,15 @@
     }
     mysqli_query($con, "UPDATE `usuarios` SET `status`= 1 WHERE `id` ='$id_login'");
 
-    $q1 = mysqli_query($con, "SELECT `nome` FROM `usuarios` WHERE `id`='$id_login'");
-    while($row = mysqli_fetch_assoc($q1)){
-        $nome = $row['nome'];
-    }
     if(isset($_GET['id'])){
         $usuario_conversa = $_GET['id'];
         $q = mysqli_query($con, "SELECT nome, status FROM `usuarios` WHERE id='$usuario_conversa'");
                     
         while($row = mysqli_fetch_assoc($q)){
-            $status_conversa = $row['status'];
-            $nome_conversa = $row['nome'];
+            $_SESSION['nome_conversa']= $row['nome'];
            
         }
-        if($status_conversa==1){
-            $status_conversa ="Online";
-        }else{
-            $status_conversa ="Offline";
-        }
+       
     }
 ?>
 <!DOCTYPE html>
@@ -44,12 +35,12 @@
     </head>
 
     <body>
-    <nav class="navbar navbar-default">
-            <div class="container-fluid">
+    <nav class="navbar navbar-default"  >
+            <div class="container-fluid" id="show-info">
             <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header" id="navbar-header">
+                <div class="navbar-header">
                     
-                    <a class="navbar-brand" > <?php echo $nome_conversa; ?> - Status:<?php echo $status_conversa; ?> </a>
+                    <a class="navbar-brand" >Você está falando com <?php echo $_SESSION['nome_conversa']; ?> </a>
                    
                 </div>
 
