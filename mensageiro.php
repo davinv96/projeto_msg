@@ -16,8 +16,21 @@
     while($row = mysqli_fetch_assoc($q1)){
         $nome = $row['nome'];
     }
-    
-    
+    if(isset($_GET['id'])){
+        $usuario_conversa = $_GET['id'];
+        $q = mysqli_query($con, "SELECT nome, status FROM `usuarios` WHERE id='$usuario_conversa'");
+                    
+        while($row = mysqli_fetch_assoc($q)){
+            $status_conversa = $row['status'];
+            $nome_conversa = $row['nome'];
+           
+        }
+        if($status_conversa==1){
+            $status_conversa ="Online";
+        }else{
+            $status_conversa ="Offline";
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -31,7 +44,26 @@
     </head>
 
     <body>
-       
+    <nav class="navbar navbar-default">
+            <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header" id="navbar-header">
+                    
+                    <a class="navbar-brand" > <?php echo $nome_conversa; ?> - Status:<?php echo $status_conversa; ?> </a>
+                   
+                </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    
+					</li>
+				</ul>
+     
+     
+			</div><!-- /.navbar-collapse -->
+			</div><!-- /.container-fluid -->
+		</nav>
      
 		<div class="message-body"> 		
 			<div class="display-message">

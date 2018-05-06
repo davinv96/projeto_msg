@@ -34,3 +34,9 @@ $(document).ready(function(){
         $("#show-contacts").load("interface.php #show-contacts");
     }, 2000);
 });
+
+$(document).ready(function(){
+    setInterval(function() {
+        $("#navbar-header").load("mensageiro.php #navbar-header");
+    }, 2000);
+});
