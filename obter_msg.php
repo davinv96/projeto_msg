@@ -44,7 +44,12 @@
             }
         }else{
             echo "Sem mensagens";
-        }
+		}
+		$data = date("Y-m-d H:i:s");
+		$q1 = mysqli_query($con, "INSERT INTO `mensagens` (`lida`) VALUES ('$data') where `usuario_envio`=  '$usuario_envio_msg' 
+		AND `usuario_destino` = '$usuario_destino' 
+		OR `usuario_envio`='$usuario_destino' AND `usuario_destino`='$usuario_envio_msg'");
+		
     }
- 
+	
 ?>
