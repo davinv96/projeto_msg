@@ -62,7 +62,7 @@
         <div class="show-contacts" id="show-contacts">
         <?php
         $q = mysqli_query($con, "SELECT * FROM `usuarios` WHERE id!='$id_login'");
-                    
+                  
         while($row = mysqli_fetch_assoc($q)){
             $status = $row['status'];
             if($status==1){
@@ -72,6 +72,8 @@
             }
                     
              echo "<a target='_blank' href='mensageiro.php?id={$row['id']}'><li>Nome: {$row['nome']} - Status: ".$status;"<hr></li></a>";
+
+             
                     
         }
         ?>

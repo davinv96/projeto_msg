@@ -11,7 +11,7 @@
     if(isset($_GET['c_id'])){       
         $id_conversa = $_GET['c_id'];        
         $q = mysqli_query($con, "SELECT * FROM mensagens WHERE id_conversa='$id_conversa'");
-		
+	
         if(mysqli_num_rows($q) > 0){
             while ($m = mysqli_fetch_assoc($q)) {              
                 $usuario_envio_msg = $m['usuario_envio'];
@@ -45,11 +45,10 @@
         }else{
             echo "Sem mensagens";
 		}
-		$data = date("Y-m-d H:i:s");
-		$q1 = mysqli_query($con, "INSERT INTO `mensagens` (`lida`) VALUES ('$data') where `usuario_envio`=  '$usuario_envio_msg' 
-		AND `usuario_destino` = '$usuario_destino' 
-		OR `usuario_envio`='$usuario_destino' AND `usuario_destino`='$usuario_envio_msg'");
+		
 		
     }
-	
+	date_default_timezone_set('America/Sao_Paulo'); 
+	$data = date("Y-m-d H:i:s");
+	$q1 = mysqli_query($con, "UPDATE mensagens SET lida='$data' WHERE `usuario_envio`= $id_login");
 ?>
