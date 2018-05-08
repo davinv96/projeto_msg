@@ -17,17 +17,6 @@
         $nome = $row['nome'];
     }
     
-    $q2= mysqli_query($con, "SELECT `usuario_destino` FROM mensagens WHERE `lida` < NOW() - INTERVAL 1 MINUTE and `usuario_envio` =' $id_login' LIMIT 1");
-    while($row = mysqli_fetch_assoc($q2)){
-        $id_usr_notificacao = $row['usuario_destino'];
-    }
-
-    $q3= mysqli_query($con, "SELECT `nome` FROM usuarios WHERE `id` ='$id_usr_notificacao'");
-    while($row = mysqli_fetch_assoc($q3)){
-        $nome_notificacao = $row['nome'];
-    }
-    
-
     
 ?>
 <!DOCTYPE html>
@@ -66,17 +55,31 @@
                 </ul>
                 
                 <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mensagens não lidas <span class="glyphicon glyphicon-envelope"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Contatos que enviaram mensagens nos <br>últimos 30 minutos e não foram lidas:<hr></a></li>
-            <?php echo "<a target='_blank' href='mensageiro.php?id='$id_usr_notificacao;'><li>$nome_notificacao<hr></li></a>";?>
-
-           
-          </ul>
-        </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mensagens não lidas <span class="glyphicon glyphicon-envelope"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>Contatos que enviaram mensagens nos <br>últimos 30 minutos e não foram lidas:<hr></li>
+                                <?php
+                
+                                 $q2= mysqli_query($con, "SELECT `usuario_destino` FROM mensagens WHERE `lida` < NOW() - INTERVAL 30 MINUTE and `usuario_envio` =' $id_login' LIMIT 1");
+                                while($row = mysqli_fetch_assoc($q2)){
+                                    $id_usr_notificacao = $row['usuario_destino'];
+                                    if ($id_usr_notificacao>0){     
+                                         $url_notificacao = "mensageiro.php?id=".$id_usr_notificacao;
+                                         $q3= mysqli_query($con, "SELECT `nome` FROM usuarios WHERE `id` ='$id_usr_notificacao'");
+                                         while($row = mysqli_fetch_assoc($q3)){
+                                            $nome_notificacao = $row['nome'];                    
+                                        }
+                                    echo "<a target='_blank' href='$url_notificacao'><li>$nome_notificacao<hr></li></a>";     
+                                    }else{  
+                       
+                                    }
+                                }
+                ?>
+            </ul>
+            </li>
                   
-                </ul>
+            </ul>
                
 			</div><!-- /.navbar-collapse -->
 			</div><!-- /.container-fluid -->
@@ -92,8 +95,8 @@
             }else{
                 $status="Offline";
             }
-                    
-             echo "<a target='_blank' href='mensageiro.php?id={$row['id']}'><li>Nome: {$row['nome']} - Status: ".$status;"<hr></li></a>";
+           
+            echo "<a target='_blank' href='mensageiro.php?id={$row['id']}'><li>Nome: {$row['nome']} - Status: ".$status;"<hr></li></a>";
 
              
                     

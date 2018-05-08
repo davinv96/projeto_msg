@@ -40,3 +40,9 @@ $(document).ready(function(){
         $("#show-info").load("mensageiro.php #show-info");
     }, 2000);
 });
+
+$(document).ready(function(){
+    setInterval(function() {
+        $("#bs-example-navbar-collapse-1").load("mensageiro.php #bs-example-navbar-collapse-1");
+    }, 20000);
+});
