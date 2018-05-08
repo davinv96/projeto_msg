@@ -17,9 +17,14 @@
         $nome = $row['nome'];
     }
     
-    $q2= mysqli_query($con, "SELECT `usuario_destino` FROM mensagens WHERE `lida` < NOW() - INTERVAL 30 MINUTE and `usuario_envio` =' $id_login'");
+    $q2= mysqli_query($con, "SELECT `usuario_destino` FROM mensagens WHERE `lida` < NOW() - INTERVAL 1 MINUTE and `usuario_envio` =' $id_login' LIMIT 1");
     while($row = mysqli_fetch_assoc($q2)){
-        $usuario_dest = $row['usuario_destino'];
+        $id_usr_notificacao = $row['usuario_destino'];
+    }
+
+    $q3= mysqli_query($con, "SELECT `nome` FROM usuarios WHERE `id` ='$id_usr_notificacao'");
+    while($row = mysqli_fetch_assoc($q3)){
+        $nome_notificacao = $row['nome'];
     }
     
 
@@ -53,15 +58,26 @@
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li class="nav-item ">
-                        <a class="nav-link" href="http://localhost/projeto_msg/logout.php">Sair <span class="sr-only"></span></a>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="nav-item ">
+                        <a class="nav-link" href="http://localhost/projeto_msg/logout.php">Sair <span class="glyphicon glyphicon-log-out"></span></a>
                     </li>
-                    
-					</li>
-				</ul>
-     
-     
+        
+                </ul>
+                
+                <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mensagens não lidas <span class="glyphicon glyphicon-envelope"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Contatos que enviaram mensagens nos <br>últimos 30 minutos e não foram lidas:<hr></a></li>
+            <?php echo "<a target='_blank' href='mensageiro.php?id='$id_usr_notificacao;'><li>$nome_notificacao<hr></li></a>";?>
+
+           
+          </ul>
+        </li>
+                  
+                </ul>
+               
 			</div><!-- /.navbar-collapse -->
 			</div><!-- /.container-fluid -->
 		</nav>
