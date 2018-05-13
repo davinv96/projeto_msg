@@ -16,17 +16,19 @@
             while ($m = mysqli_fetch_assoc($q)) {              
                 $usuario_envio_msg = $m['usuario_envio'];
                 $usuario_destino = $m['usuario_destino'];
-                $mensagem = $m['mensagens'];               
+				$mensagem = $m['mensagens'];
+				$timestamp = $m['timestamp'];               
                 $usuarios = mysqli_query($con, "SELECT nome FROM usuarios WHERE id='$usuario_envio_msg'");
                 $usuario_fetch = mysqli_fetch_assoc($usuarios);
                 $usuario_env = $usuario_fetch['nome'];
-				
+				$data_de_envio = date('d/m/Y - H:m:s',strtotime($timestamp));
 				if($usuario_envio_msg==$id_login){
 					echo 
 						"<div class='bubble-right'>
 							<div class='text-con'>
-								<a href='#''>{$usuario_env}</a>
-								<p>{$mensagem}</p>
+								<a href='#''>{$usuario_env}</a><br><br>
+								<b>{$mensagem}</b><br><br>
+								<p>{$data_de_envio}</p>
 							</div>
 						</div>
 						<br>";
@@ -35,8 +37,9 @@
 					echo
 						"<div class='bubble-left'>
 							<div class='text-con'>
-								<a href='#''>{$usuario_env}</a>
-								<p>{$mensagem}</p>
+								<a href='#''>{$usuario_env}</a><br><br>
+								<b>{$mensagem}</b><br><br>
+								<p>{$data_de_envio}</p>
 							</div>
 						</div>
 						<br>";

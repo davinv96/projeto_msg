@@ -31,32 +31,20 @@
     </head>
 
     <body>
-        <nav class="navbar navbar-default">
+        <nav class="navbar navbar-inverse">
             <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="http://localhost/projeto_msg/home.php">UlbraChat - Olá, <?php echo $nome; ?></a>
                    
-                </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-                <li class="nav-item ">
-                        <a class="nav-link" href="http://localhost/projeto_msg/logout.php">Sair <span class="glyphicon glyphicon-log-out"></span></a>
-                    </li>
+                    <a class="navbar-brand" href="http://localhost/projeto_msg/home.php">UlbraChat - Olá, <?php echo $nome; ?></a>
+                    
+                    <a class="navbar-brand" href="http://localhost/projeto_msg/logout.php">  Sair <span class="glyphicon glyphicon-log-out"></span></a>
+              
         
-                </ul>
+                </div>
                 
-                
-               
-			</div><!-- /.navbar-collapse -->
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            
 			</div><!-- /.container-fluid -->
 		</nav>
         <div class="show-contacts" id="show-contacts">
