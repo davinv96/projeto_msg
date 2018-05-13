@@ -54,54 +54,40 @@
         
                 </ul>
                 
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mensagens não lidas <span class="glyphicon glyphicon-envelope"></span></a>
-                            <ul class="dropdown-menu">
-                                <li>Contatos que enviaram mensagens nos <br>últimos 30 minutos e não foram lidas:<hr></li>
-                                <?php
                 
-                                 $q2= mysqli_query($con, "SELECT `usuario_destino` FROM mensagens WHERE `lida` < NOW() - INTERVAL 30 MINUTE and `usuario_envio` =' $id_login' LIMIT 1");
-                                while($row = mysqli_fetch_assoc($q2)){
-                                    $id_usr_notificacao = $row['usuario_destino'];
-                                    if ($id_usr_notificacao>0){     
-                                         $url_notificacao = "mensageiro.php?id=".$id_usr_notificacao;
-                                         $q3= mysqli_query($con, "SELECT `nome` FROM usuarios WHERE `id` ='$id_usr_notificacao'");
-                                         while($row = mysqli_fetch_assoc($q3)){
-                                            $nome_notificacao = $row['nome'];                    
-                                        }
-                                    echo "<a target='_blank' href='$url_notificacao'><li>$nome_notificacao<hr></li></a>";     
-                                    }else{  
-                       
-                                    }
-                                }
-                ?>
-            </ul>
-            </li>
-                  
-            </ul>
                
 			</div><!-- /.navbar-collapse -->
 			</div><!-- /.container-fluid -->
 		</nav>
         <div class="show-contacts" id="show-contacts">
-        <?php
-        $q = mysqli_query($con, "SELECT * FROM `usuarios` WHERE id!='$id_login'");
+            <caption>Lista de contatos</caption>
+            <table  class="table table-bordered">
+		    <tr>
+			    <th scope="col"> Nome</th>
+			    <th scope="col"> Status</th>
+			
+		    </tr>
+            <?php
+             $q = mysqli_query($con, "SELECT * FROM `usuarios` WHERE id!='$id_login'");
                   
-        while($row = mysqli_fetch_assoc($q)){
-            $status = $row['status'];
-            if($status==1){
-                $status="Online";
-            }else{
-                $status="Offline";
+            while($row = mysqli_fetch_assoc($q)){
+                $array[] = $row;
+                  
             }
-           
-            echo "<a target='_blank' href='mensageiro.php?id={$row['id']}'><li>Nome: {$row['nome']} - Status: ".$status;"<hr></li></a>";
-
-             
-                    
+            foreach ($array as $row){
+                echo "<tr>";        
+                echo "<td><a target='_blank' href='mensageiro.php?id={$row['id']}'>".$row['nome']."</td>";
+                if($row['status']=="1"){
+                    echo "<td style='color:green'>Online</td>";
+                }else{
+                    echo "<td style='color:red'>Offline</td>";
+                }
+            
+          
+                echo "</tr>";
         }
         ?>
+        </table>
 		</div>
 	</body>
 
