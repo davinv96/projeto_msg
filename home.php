@@ -76,6 +76,34 @@
         }
         ?>
         </table>
+        <caption>Mensagens não lidas</caption>
+            <table  class="table table-bordered">
+		    <tr>
+			    <th scope="col"> Nome</th>
+			    <th scope="col"> Status</th>
+			
+		    </tr>
+            <?php
+             $q = mysqli_query($con, "SELECT * FROM `usuarios` WHERE id!='$id_login'");
+                  
+            while($row = mysqli_fetch_assoc($q)){
+                $array[] = $row;
+                  
+            }
+            foreach ($array as $row){
+                echo "<tr>";        
+                echo "<td><a target='_blank' href='mensageiro.php?id={$row['id']}'>".$row['nome']."</td>";
+                if($row['status']=="1"){
+                    echo "<td style='color:green'>Online</td>";
+                }else{
+                    echo "<td style='color:red'>Offline</td>";
+                }
+            
+          
+                echo "</tr>";
+        }
+        ?>
+        </table>
 		</div>
 	</body>
 
