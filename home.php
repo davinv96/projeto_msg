@@ -56,7 +56,7 @@
 			
 		    </tr>
             <?php
-             $q = mysqli_query($con, "SELECT * FROM `usuarios` WHERE id!='$id_login'");
+            $q = mysqli_query($con, "SELECT * FROM `usuarios` WHERE id!='$id_login'");
                   
             while($row = mysqli_fetch_assoc($q)){
                 $array[] = $row;
@@ -66,7 +66,7 @@
                 echo "<tr>";        
                 echo "<td><a target='_blank' href='mensageiro.php?id={$row['id']}'>".$row['nome']."</td>";
                 if($row['status']=="1"){
-                    echo "<td style='color:green'>Online</td>";
+                    echo "<td style='color:green'><b>Online</b></td>";
                 }else{
                     echo "<td style='color:red'>Offline</td>";
                 }
@@ -74,36 +74,53 @@
           
                 echo "</tr>";
         }
+        
         ?>
         </table>
-        <caption>Mensagens não lidas</caption>
+        <caption>Conversas com mensagens não lidas</caption>
             <table  class="table table-bordered">
-		    <tr>
-			    <th scope="col"> Nome</th>
-			    <th scope="col"> Status</th>
-			
-		    </tr>
-            <?php
-             $q = mysqli_query($con, "SELECT * FROM `usuarios` WHERE id!='$id_login'");
-                  
-            while($row = mysqli_fetch_assoc($q)){
-                $array[] = $row;
-                  
-            }
-            foreach ($array as $row){
-                echo "<tr>";        
-                echo "<td><a target='_blank' href='mensageiro.php?id={$row['id']}'>".$row['nome']."</td>";
-                if($row['status']=="1"){
-                    echo "<td style='color:green'>Online</td>";
-                }else{
-                    echo "<td style='color:red'>Offline</td>";
-                }
+		    
+        <?php
+            $q = mysqli_query($con, "SELECT `usuario_destino` FROM `mensagens` WHERE `lida` = 0 AND `usuario_destino`= $id_login");
             
-          
-                echo "</tr>";
-        }
+            if(mysqli_num_rows($q) <= 0){
+                echo " - Sem mensagens";
+               
+            }else{
+                ?>
+                     <tr>
+			                <th scope='col'> Nome</th>
+			                <th scope='col'> Status</th>
+		                    </tr>
+                    <tr>
+
+                <?php
+                $q1 = mysqli_query($con, "SELECT `usuario_envio` FROM `mensagens` WHERE `lida` = 0 AND `usuario_destino`= $id_login");
+                while($row = mysqli_fetch_assoc($q1)){
+                    $usuario_envio = $row['usuario_envio'];
+                }
+
+                $q2 = mysqli_query($con, "SELECT * FROM `usuarios` WHERE id = '$usuario_envio' AND id!= $id_login");
+                while($row = mysqli_fetch_assoc($q2)){
+                    $array[] = $row;
+                }
+
+                foreach ($array as $row){
+                    echo "<tr>";
+                    echo "<td><a target='_blank' href='mensageiro.php?id={$row['id']}'>".$row['nome']." <span class='glyphicon glyphicon-envelope'></td>";
+                    if($row['status']=="1"){
+                        echo "<td style='color:green'><b>Online</b></td>";
+                    }else{
+                        echo "<td style='color:red'>Offline</td>";
+                    }
+        
+      
+                    echo "</tr>";
+                    
+                }   
+            }
         ?>
-        </table>
+       </table>
 		</div>
 	</body>
 
