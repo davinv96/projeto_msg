@@ -52,7 +52,6 @@
 		
 		
     }
-	date_default_timezone_set('America/Sao_Paulo'); 
-	$data = date("Y-m-d H:i:s");
-//	$q1 = mysqli_query($con, "UPDATE mensagens SET lida='$data' WHERE `usuario_envio`= $id_login");
+	
+	$q1 = mysqli_query($con, "UPDATE mensagens SET lida=1 WHERE `usuario_destino`= $id_login");
 ?>
