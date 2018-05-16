@@ -16,7 +16,7 @@
     while($row = mysqli_fetch_assoc($q1)){
         $nome = $row['nome'];
     }
-    
+
     
 ?>
 <!DOCTYPE html>
@@ -101,11 +101,8 @@
                 }
 
                 $q2 = mysqli_query($con, "SELECT * FROM `usuarios` WHERE id = '$usuario_envio' AND id!= $id_login");
+                
                 while($row = mysqli_fetch_assoc($q2)){
-                    $array[] = $row;
-                }
-
-                foreach ($array as $row){
                     echo "<tr>";
                     echo "<td><a target='_blank' href='mensageiro.php?id={$row['id']}'>".$row['nome']." <span class='glyphicon glyphicon-envelope'></td>";
                     if($row['status']=="1"){
@@ -116,8 +113,8 @@
         
       
                     echo "</tr>";
-                    
-                }   
+                }
+
             }
         ?>
        </table>
