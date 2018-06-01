@@ -32,6 +32,6 @@ $(document).ready(function(){
 $(document).ready(function(){
     setInterval(function() {
         $("#show-contacts").load("home.php #show-contacts");
-    }, 2000);
+    }, 3500);
 });
 
