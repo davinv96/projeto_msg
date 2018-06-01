@@ -78,7 +78,7 @@
             <!-- /display message -->
 			</div>
             <!-- send message -->
-            <div class="send-message">
+            <div class="send-message" id="send-message">
                
                 <input type="hidden" id="id_conversa" value="<?php echo $id_conversa; ?>">
                 <input type="hidden" id="usuario_envio_msg" value="<?php echo $id_login; ?>">
