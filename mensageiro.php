@@ -26,7 +26,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>UlbraChat</title>
+        <title>UlbraChat - Conversa</title>
+        <link rel="icon" href="img/logo.png" type="image/x-icon" />
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="css/style.css">
 	    <script src="js/jquery.min.js"></script>
