@@ -37,8 +37,8 @@ $con = conectar();
 					<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Usuários <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-					<li><a href="http://localhost/projeto_msg/admin/adicionar_usuarios.php">Adicionar usuários</a></li>
-					<li><a href="http://localhost/projeto_msg/admin/editar_ou_excluir_usuarios.php">Editar ou Excluir usuários</a></li>
+					<li><a href="#">Adicionar usuários</a></li>
+					<li><a href="#">Editar ou Excluir usuários</a></li>
 					
 					</ul>
 					</li>
@@ -53,7 +53,7 @@ $con = conectar();
 					<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Administradores <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="http://localhost/projeto_msg/admin/adicionar_admin.php">Adicionar Administradores</a></li>
+						<li><a href="#">Adicionar Administradores</a></li>
 						<li><a href="#">Editar ou Excluir Administrador</a></li>
 					</ul>
 					</li>
@@ -64,5 +64,44 @@ $con = conectar();
 				</div><!-- /.navbar-collapse -->
 			</div><!-- /.container-fluid -->
 			</nav>
+
+			<form name="cadastro-admin" action="" method="POST">
+				<div class="form-group">
+					<label for="exampleInputEmail1">Nome do usuário</label>
+					<input type="text" class="form-control" id="nome_usuario" name="nome" aria-describedby="emailHelp" placeholder="Digite seu nome e sobrenome">
+				</div>
+				<div class="form-group">
+					<label for="exampleInputPassword1">Senha</label>
+					<input type="password" class="form-control" id="senha_usuario" name="senha" placeholder="Digite sua Senha">
+				</div>
+				<div class="form-group">
+					<label for="exampleInputEmail1">E-mail</label>
+					<input type="email" class="form-control" id="email_usuario" name="email" placeholder="Informe seu email">
+					<small id="emailHelp" class="form-text text-muted">Será usado no Login</small>
+				</div>
+				<button type="reset" class="btn btn-danger">Limpar</button>		
+ 				<button type="submit" class="btn btn-primary" name="cadastrar">Cadastrar</button>
+			</form>
 		</body>
 </html>
+<?php
+	if(isset($_POST['cadastrar'])){
+ 		$nome = $_POST["nome"];
+ 		$senha = md5($_POST["senha"]);
+		$email = $_POST["email"];
+		
+
+	
+		$resultado = mysqli_query($con, "INSERT INTO admin (nome, senha, email)
+		VALUES ('$nome', '$senha', '$email')");
+		if(mysqli_affected_rows($con)>0){
+			echo "<script>alert('Administrador cadastrado com sucesso!');</script>";
+				
+		}else{
+			echo "<script>alert('Erro no cadastro!');</script>";
+
+		}
+		
+	}
+
+?>
