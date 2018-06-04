@@ -1,5 +1,5 @@
 <?php 
-include("includes/banco.php"); 
+include("../includes/banco.php"); 
 $con = conectar();
 		
 ?>

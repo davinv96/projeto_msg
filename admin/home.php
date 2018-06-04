@@ -1,7 +1,8 @@
 <?php 
 include("../includes/banco.php"); 
 $con = conectar();
-		
+
+    
 ?>
 <!DOCTYPE html>
 <html>
@@ -59,7 +60,7 @@ $con = conectar();
 					</li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#">Sair <span class="glyphicon glyphicon-log-out"></span></a></li>
+					<li><a href="http://localhost/projeto_msg/admin/logout.php">Sair <span class="glyphicon glyphicon-log-out"></span></a></li>
 				</ul>
 				</div><!-- /.navbar-collapse -->
 			</div><!-- /.container-fluid -->
