@@ -68,7 +68,7 @@ $con = conectar();
 			<form name="cadastro-usuario" action="" method="POST">
 				<div class="form-group">
 					<label for="exampleInputEmail1">Nome do usuário</label>
-					<input type="text" class="form-control" id="nome_usuario" name="nome" aria-describedby="emailHelp" placeholder="Digite seu nome e sobrenome">
+					<input type="text" class="form-control" id="nome_usuario" name="nome" placeholder="Digite seu nome e sobrenome">
 				</div>
 				<div class="form-group">
 					<label for="exampleInputPassword1">Senha</label>
@@ -76,7 +76,7 @@ $con = conectar();
 				</div>
 				<div class="form-group">
 					<label for="exampleInputEmail1">E-mail</label>
-					<input type="email" class="form-control" id="email_usuario" name="email" placeholder="Informe seu email">
+					<input type="email" class="form-control" id="email_usuario" name="email" aria-describedby="emailHelp" placeholder="Informe seu email">
 					<small id="emailHelp" class="form-text text-muted">Será usado no Login</small>
 				</div>
 				<div class="form-group">
