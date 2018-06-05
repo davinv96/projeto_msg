@@ -87,7 +87,7 @@ $con = conectar();
 						
 						}
 						foreach ($array as $row){
-							echo "<tr>";        
+							echo "<option value=>";        
 							echo "<td>".$row['nome']."</td>";
 							echo "<td>********</td>";
 							echo "<td>".$row['num_matricula']."</td>";

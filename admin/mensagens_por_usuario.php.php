@@ -66,4 +66,20 @@ $con = conectar();
 			</div><!-- /.container-fluid -->
 			</nav>
 		</body>
+		<select name="formGender">
+
+			<?php
+			$q = mysqli_query($con, "SELECT * FROM `usuarios`");
+						
+			while($row = mysqli_fetch_assoc($q)){
+				$array[] = $row;		
+			}
+			foreach ($array as $row){
+			?>
+				<option value=<?php echo $row['id'];?> >Nome: <?php echo $row['nome'];?> - Número de matrícula: <?php echo $row['senha'];?> </option>
+			<?php
+			}
+
+			?>
+		</select>
 </html>
