@@ -44,7 +44,7 @@ $con = conectar();
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Conversas <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="#">Visualizar Conversas</a></li>
-						<li><a href="#">Deletar conversas</a></li>
+						
 					
 					</ul>
 					</li>
@@ -52,7 +52,7 @@ $con = conectar();
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Administradores <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="http://localhost/projeto_msg/admin/adicionar_admin.php">Adicionar Administradores</a></li>
-						<li><a href="#">Editar ou Excluir Administrador</a></li>
+						<li><a href="http://localhost/projeto_msg/admin/editar_ou_excluir_admin.php">Editar ou Excluir Administrador</a></li>
 					</ul>
 					</li>
 				</ul>
@@ -108,45 +108,46 @@ $con = conectar();
 									</div>
 								</fieldset>
 								<button type="reset" class="btn btn-danger">Limpar</button>		
-								<button type="submit" class="btn btn-primary" name="cadastrar">Cadastrar</button>
+								<button type="submit" class="btn btn-primary" name="cadastrar">Salvar</button>
 							</form>
 						<?php
 
 						}
-						if(isset($_POST['cadastrar'])){
-						
-							$nome = $_POST["nome"];
-							$senha = md5($_POST["senha"]);
-						   $email = $_POST["email"];
-						   $num_matricula = $_POST["nummatricula"];
-						   $professor = $_POST["radio_professor"];
-				   
-						   if($professor == 1){
-							   $resultado = mysqli_query($con, "UPDATE usuarios SET nome='$nome', senha='$senha', email='$email', num_matricula='$num_matricula', professor='$professor'
-							   WHERE id= '$id");
-							   
-							   if(mysqli_affected_rows($con)>0){
-								   echo "<script>alert('Professor cadastrado com sucesso!');</script>";
-								   
-							   }else{
-								   echo "<script>alert('Erro no cadastro!');</script>";
-				   
-							   }
-						   }else{
-							   $resultado = mysqli_query($con, "INSERT INTO usuarios (nome, senha, num_matricula, email, professor)
-							   VALUES ('$nome', '$senha', '$num_matricula', '$email', '$professor')");
-							   
-							   if(mysqli_affected_rows($con)>0){
-									echo "<script>alert('Usuario editado com sucesso!');";
-									echo "javascript:window.location='http://localhost/projeto_msg/admin/editar_ou_excluir_usuarios.php';</script>";
-								   
-							   }else{
-								   echo "<script>alert('Erro na edição!');</script>";
-				   
-							   }
-				   
-						   }
-					   }
+					
 
 				?>
 </html>
+<?php
+if(isset($_POST['cadastrar'])){
+						
+						$nome = $_POST["nome"];
+						$senha = md5($_POST["senha"]);
+					   $email = $_POST["email"];
+					   $num_matricula = $_POST["nummatricula"];
+					   $professor = $_POST["radio_professor"];
+			   
+					   if($professor == 1){
+						   $resultado = mysqli_query($con, "UPDATE `usuarios` SET nome='$nome', senha='$senha', email='$email', num_matricula='$num_matricula', professor='$professor' 
+						   WHERE id='$id'");
+						   
+						   if(mysqli_affected_rows($con)>0){
+							   echo "<script>alert('Edição feita com sucesso!')
+							   javascript:window.location='http://localhost/projeto_msg/admin/editar_ou_excluir_usuarios.php';</script>";
+						   }else{
+								echo mysqli_error($con);
+			   
+						   }
+					   }else{
+						$resultado = mysqli_query($con, "UPDATE `usuarios` SET nome='$nome', senha='$senha', email='$email', num_matricula='$num_matricula', professor='$professor'
+						WHERE id='$id'");
+						  if(mysqli_affected_rows($con)>0){
+							echo "<script>alert('Edição feita com sucesso!')
+							javascript:window.location='http://localhost/projeto_msg/admin/editar_ou_excluir_usuarios.php';</script>";
+						}else{
+							 echo mysqli_error($con);
+			
+						}
+			   
+					   }
+				   }
+?>

@@ -18,8 +18,8 @@ $con = conectar();
 		<body style="background:#eee;">
 		
 
-				<nav class="navbar navbar-default">
-			<div class="container-fluid">
+			<nav class="navbar navbar-default">
+				<div class="container-fluid">
 				<!-- Brand and toggle get grouped for better mobile display -->
 				<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -37,8 +37,8 @@ $con = conectar();
 					<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Usuários <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-					<li><a href="#">Adicionar usuários</a></li>
-					<li><a href="#">Editar ou Excluir usuários</a></li>
+					<li><a href="http://localhost/projeto_msg/admin/adicionar_usuarios.php">Adicionar usuários</a></li>
+					<li><a href="http://localhost/projeto_msg/admin/editar_ou_excluir_usuarios.php">Editar ou Excluir usuários</a></li>
 					
 					</ul>
 					</li>
@@ -46,15 +46,15 @@ $con = conectar();
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Conversas <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="#">Visualizar Conversas</a></li>
-						<li><a href="#">Deletar conversas</a></li>
+						
 					
 					</ul>
 					</li>
 					<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Administradores <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="#">Adicionar Administradores</a></li>
-						<li><a href="#">Editar ou Excluir Administrador</a></li>
+						<li><a href="http://localhost/projeto_msg/admin/adicionar_admin.php">Adicionar Administradores</a></li>
+						<li><a href="http://localhost/projeto_msg/admin/editar_ou_excluir_admin.php">Editar ou Excluir Administrador</a></li>
 					</ul>
 					</li>
 				</ul>

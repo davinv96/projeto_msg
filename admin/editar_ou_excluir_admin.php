@@ -62,78 +62,41 @@ $con = conectar();
 				</div><!-- /.navbar-collapse -->
 			</div><!-- /.container-fluid -->
 			</nav>
-
-			<form name="cadastro-usuario" action="" method="POST">
-				<div class="form-group">
-					<label for="exampleInputEmail1">Nome do usuário</label>
-					<input type="text" class="form-control" id="nome_usuario" name="nome" placeholder="Digite seu nome e sobrenome">
-				</div>
-				<div class="form-group">
-					<label for="exampleInputPassword1">Senha</label>
-					<input type="password" class="form-control" id="senha_usuario" name="senha" placeholder="Digite sua Senha">
-				</div>
-				<div class="form-group">
-					<label for="exampleInputEmail1">E-mail</label>
-					<input type="email" class="form-control" id="email_usuario" name="email" aria-describedby="emailHelp" placeholder="Informe seu email">
-					<small id="emailHelp" class="form-text text-muted">Será usado no Login</small>
-				</div>
-				<div class="form-group">
-					<label for="exampleInputEmail1">Número de matrícula</label>
-					<input type="text" class="form-control" name="nummatricula" id="num_matricula" placeholder="Informe o número de matrícula">
-				</div>
-				
-				<fieldset class="form-group">
-					<legend>O usuário será professor?</legend>
-					<div class="form-check">
-					<label class="form-check-label">
-						<input type="radio" class="form-check-input" name="radio_professor" id="optionsRadios1" value="1" checked>
-						Sim
-					</label>
-					</div>
-					<div class="form-check">
-					<label class="form-check-label">
-						<input type="radio" class="form-check-input" name="radio_professor" id="optionsRadios2" value="0">
-						Não
-					</label>
-					</div>
-				</fieldset>
-  				<button type="reset" class="btn btn-danger">Limpar</button>		
- 				<button type="submit" class="btn btn-primary" name="cadastrar">Cadastrar</button>
-			</form>
 		</body>
+
+		<table class="table">
+			<caption class="text-center"><b><h4>Lista dos Administradores</h4></b></caption>
+				<thead class="thead-dark">
+					<tr>
+						<th scope="col"> Nome</th>
+						<th scope="col"> Senha</th>
+						<th scope="col"> Email</th>
+						<th scope="col"> Editar</th>
+						<th scope="col"> Excluir</th>
+
+				
+					</tr>
+				</thead>
+					<?php
+						$q = mysqli_query($con, "SELECT * FROM `admin`");
+						
+						while($row = mysqli_fetch_assoc($q)){
+							$array[] = $row;
+						
+						}
+						foreach ($array as $row){
+							echo "<tr>";        
+							echo "<td>".$row['nome']."</td>";
+							echo "<td>********</td>";
+							echo "<td>".$row['email']."</td>";
+							
+							echo "<td><a href=http://localhost/projeto_msg/admin/editar_admin.php?id=".$row['id']."><span class='glyphicon glyphicon-edit'></span></a></td>";
+							echo "<td style='color:red'><a href=http://localhost/projeto_msg/admin/excluir_admin.php?id=".$row['id']."><span class='glyphicon glyphicon-remove'></span></a></td>";
+
+							echo "</tr>";
+					
+						}
+
+				?>
+        </table>
 </html>
-<?php
-	if(isset($_POST['cadastrar'])){
- 		$nome = $_POST["nome"];
- 		$senha = md5($_POST["senha"]);
-		$email = $_POST["email"];
-		$num_matricula = $_POST["nummatricula"];
-		$professor = $_POST["radio_professor"];
-
-		if($professor == 1){
-			$resultado = mysqli_query($con, "INSERT INTO usuarios (nome, senha, num_matricula, email, professor)
-			VALUES ('$nome', '$senha', '$num_matricula', '$email', '$professor')");
-			
-			if(mysqli_affected_rows($con)>0){
-				echo "<script>alert('Professor cadastrado com sucesso!');</script>";
-				
-			}else{
-				echo "<script>alert('Erro no cadastro!');</script>";
-
-			}
-		}else{
-			$resultado = mysqli_query($con, "INSERT INTO usuarios (nome, senha, num_matricula, email, professor)
-			VALUES ('$nome', '$senha', '$num_matricula', '$email', '$professor')");
-			
-			if(mysqli_affected_rows($con)>0){
-				echo "<script>alert('Aluno cadastrado com sucesso!');</script>";
-				
-			}else{
-				echo "<script>alert('Erro no cadastro!');</script>";
-
-			}
-
-		}
-	}
-
-?>

@@ -44,7 +44,7 @@ $con = conectar();
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Conversas <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="#">Visualizar Conversas</a></li>
-						<li><a href="#">Deletar conversas</a></li>
+						
 					
 					</ul>
 					</li>
@@ -52,7 +52,7 @@ $con = conectar();
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Administradores <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="http://localhost/projeto_msg/admin/adicionar_admin.php">Adicionar Administradores</a></li>
-						<li><a href="#">Editar ou Excluir Administrador</a></li>
+						<li><a href="http://localhost/projeto_msg/admin/editar_ou_excluir_admin.php">Editar ou Excluir Administrador</a></li>
 					</ul>
 					</li>
 				</ul>
