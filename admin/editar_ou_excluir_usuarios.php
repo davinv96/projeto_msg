@@ -74,9 +74,7 @@ $con = conectar();
 						<th scope="col"> Email</th>
 						<th scope="col"> Professor</th>
 						<th scope="col"> Editar</th>
-						<th scope="col"> Excluir</th>
-
-				
+						<th scope="col"> Excluir</th>				
 					</tr>
 				</thead>
 					<?php
@@ -87,7 +85,7 @@ $con = conectar();
 						
 						}
 						foreach ($array as $row){
-							echo "<option value=>";        
+							echo "<tr>";        
 							echo "<td>".$row['nome']."</td>";
 							echo "<td>********</td>";
 							echo "<td>".$row['num_matricula']."</td>";

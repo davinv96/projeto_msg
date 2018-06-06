@@ -66,20 +66,80 @@ $con = conectar();
 			</div><!-- /.container-fluid -->
 			</nav>
 		</body>
-		<select name="formGender">
+		<div id="form_conversas">
+			<p align="center">Selecione o usuário para consultar as conversas<p>
+				<form name="cadastro-usuario" action="" method="POST">
+					<select name="conversa_por_usuario">
 
-			<?php
-			$q = mysqli_query($con, "SELECT * FROM `usuarios`");
-						
-			while($row = mysqli_fetch_assoc($q)){
-				$array[] = $row;		
-			}
-			foreach ($array as $row){
-			?>
-				<option value=<?php echo $row['id'];?> >Nome: <?php echo $row['nome'];?> - Número de matrícula: <?php echo $row['senha'];?> </option>
-			<?php
-			}
+						<?php
+						$q = mysqli_query($con, "SELECT * FROM `usuarios`");
+									
+						while($row = mysqli_fetch_assoc($q)){
+							$array[] = $row;		
+						}
+						foreach ($array as $row){
+							if($row['professor']==1){
+						?>
+							<option value=<?php echo $row['id'];?> >Nome: <?php echo $row['nome'];?> - Número de matrícula: <?php echo $row['senha'];?> - Professor: sim </option>
+						<?php
+						}else{
+							?>
+							<option value=<?php echo $row['id'];?> >Nome: <?php echo $row['nome'];?> - Número de matrícula: <?php echo $row['senha'];?> - Professor: não </option>
+							<?php
+						}
+						}
 
-			?>
-		</select>
+						?>
+					</select>
+				</select>
+			<button type="submit" class="btn btn-primary" name="verificar">Salvar</button>
+			</form>
+		</div>
+		<?php
+		if(isset($_POST['verificar'])){
+		?>
+		<table class="table">
+					<caption class="text-center"><b><h4>Lista dos usuários</h4></b></caption>
+						<thead class="thead-dark">
+							<tr>
+								<th scope="col"> Nome</th>
+								<th scope="col"> Senha</th>
+								<th scope="col"> Numero de matricula</th>
+								<th scope="col"> Email</th>
+								<th scope="col"> Professor</th>
+								<th scope="col"> Editar</th>
+								<th scope="col"> Excluir</th>				
+							</tr>
+						</thead>
+							<?php
+								$q = mysqli_query($con, "SELECT * FROM `usuarios`");
+								
+								while($row = mysqli_fetch_assoc($q)){
+									$array[] = $row;
+								
+								}
+								foreach ($array as $row){
+									echo "<tr>";        
+									echo "<td>".$row['nome']."</td>";
+									echo "<td>********</td>";
+									echo "<td>".$row['num_matricula']."</td>";
+									echo "<td>".$row['email']."</td>";
+									if($row['professor']=="1"){
+										echo "<td><b>Sim</b></td>";
+									}else{
+										echo "<td>Não</td>";
+									}
+									
+									echo "<td><a href=http://localhost/projeto_msg/admin/editar_usuarios.php?id=".$row['id']."><span class='glyphicon glyphicon-edit'></span></a></td>";
+									echo "<td style='color:red'><a href=http://localhost/projeto_msg/admin/excluir_usuarios.php?id=".$row['id']."><span class='glyphicon glyphicon-remove'></span></a></td>";
+
+									echo "</tr>";
+							
+								}
+						}	
+						?>
+
+				</table>
 </html>
+
+
