@@ -18,8 +18,7 @@ $con = conectar();
 	</head>
 		<body style="background:#eee;">
 		
-
-				<nav class="navbar navbar-default">
+		<nav class="navbar navbar-default">
 				<div class="container-fluid">
 				<!-- Brand and toggle get grouped for better mobile display -->
 				<div class="navbar-header">
@@ -46,7 +45,6 @@ $con = conectar();
 					<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mensagens <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="#">Visualizar mensagens por conversa</a></li>
 						<li><a href="http://localhost/projeto_msg/admin/mensagens_por_usuario.php">Visualizar mensagens por usuario</a></li>
 					
 					</ul>
@@ -55,7 +53,7 @@ $con = conectar();
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Administradores <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="http://localhost/projeto_msg/admin/adicionar_admin.php">Adicionar Administradores</a></li>
-						<li><a href="http://localhost/projeto_msg/admin/editar_ou_excluir_usuarios.php">Editar ou Excluir Administrador</a></li>
+						<li><a href="http://localhost/projeto_msg/admin/editar_ou_excluir_admin.php">Editar ou Excluir Administrador</a></li>
 					</ul>
 					</li>
 				</ul>
@@ -65,5 +63,42 @@ $con = conectar();
 				</div><!-- /.navbar-collapse -->
 			</div><!-- /.container-fluid -->
 			</nav>
+			<div>
+			<table class="table">
+			<caption class="text-center"><b><h4>Usuários do UlbraChat no momento</h4></b></caption>
+				<thead class="thead-dark">
+					<tr>
+						<th scope="col"> Nome</th>
+						<th scope="col"> Número de matrícla</th>
+						<th scope="col"> Status</th>
+				
+					</tr>
+				</thead>
+					<?php
+						$q = mysqli_query($con, "SELECT * FROM `usuarios`");
+						
+						while($row = mysqli_fetch_assoc($q)){
+							$array[] = $row;
+						
+						}
+						foreach ($array as $row){
+							echo "<tr>";        
+							echo "<td>".$row['nome']."</td>";
+							echo "<td>".$row['num_matricula']."</td>";
+							if($row['status']=="1"){
+								echo "<td style='color:green'><b>Online</b></td>";
+							}else{
+								echo "<td style='color:red'>Offline</td>";
+							}
+							
+							
+
+							echo "</tr>";
+					
+						}
+
+				?>
+			</div>
+
 		</body>
 </html>

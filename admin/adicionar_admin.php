@@ -16,9 +16,7 @@ $con = conectar();
 	
 	</head>
 		<body style="background:#eee;">
-		
-
-			<nav class="navbar navbar-default">
+		<nav class="navbar navbar-default">
 				<div class="container-fluid">
 				<!-- Brand and toggle get grouped for better mobile display -->
 				<div class="navbar-header">
@@ -43,10 +41,9 @@ $con = conectar();
 					</ul>
 					</li>
 					<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Conversas <span class="caret"></span></a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mensagens <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="#">Visualizar Conversas</a></li>
-						
+						<li><a href="http://localhost/projeto_msg/admin/mensagens_por_usuario.php">Visualizar mensagens por usuario</a></li>
 					
 					</ul>
 					</li>

@@ -18,8 +18,7 @@ $con = conectar();
 	</head>
 		<body style="background:#eee;">
 		
-
-				<nav class="navbar navbar-default">
+		<nav class="navbar navbar-default">
 				<div class="container-fluid">
 				<!-- Brand and toggle get grouped for better mobile display -->
 				<div class="navbar-header">
@@ -55,7 +54,7 @@ $con = conectar();
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Administradores <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="http://localhost/projeto_msg/admin/adicionar_admin.php">Adicionar Administradores</a></li>
-						<li><a href="http://localhost/projeto_msg/admin/editar_ou_excluir_usuarios.php">Editar ou Excluir Administrador</a></li>
+						<li><a href="http://localhost/projeto_msg/admin/editar_ou_excluir_admin.php">Editar ou Excluir Administrador</a></li>
 					</ul>
 					</li>
 				</ul>
@@ -66,10 +65,10 @@ $con = conectar();
 			</div><!-- /.container-fluid -->
 			</nav>
 		</body>
-		<div id="form_conversas">
+		<div id="form_conversas" class="container-fluid" align="center">
 			<p align="center">Selecione o usuário para consultar as conversas<p>
 				<form name="cadastro-usuario" action="" method="POST">
-					<select name="conversa_por_usuario">
+					<select name="usuario_conversa">
 
 						<?php
 						$q = mysqli_query($con, "SELECT * FROM `usuarios`");
@@ -92,54 +91,53 @@ $con = conectar();
 						?>
 					</select>
 				</select>
-			<button type="submit" class="btn btn-primary" name="verificar">Salvar</button>
+			<button type="submit" class="btn btn-primary" name="verificar">Verificar</button>
 			</form>
 		</div>
 		<?php
-		if(isset($_POST['verificar'])){
+		if(isset($_POST['usuario_conversa'])){
+			$usuario_conversa = $_POST['usuario_conversa'];
+			$q1 = mysqli_query($con, "SELECT nome FROM `usuarios` WHERE id='$usuario_conversa'");
+
+			while($row = mysqli_fetch_assoc($q1)){
+				$nome_remet = $row['nome'];		
+			}
+			
+		
 		?>
 		<table class="table">
-					<caption class="text-center"><b><h4>Lista dos usuários</h4></b></caption>
+					<caption class="text-center"><b><h4>Mensagens enviadas por <?php echo $nome_remet; ?></h4></b></caption>
 						<thead class="thead-dark">
 							<tr>
-								<th scope="col"> Nome</th>
-								<th scope="col"> Senha</th>
-								<th scope="col"> Numero de matricula</th>
-								<th scope="col"> Email</th>
-								<th scope="col"> Professor</th>
-								<th scope="col"> Editar</th>
-								<th scope="col"> Excluir</th>				
+								<th scope="col"> Destinatário</th>
+								<th scope="col"> Mensagem</th>
+								<th scope="col"> Horário de envio</th>
+								<th scope="col"> Visualizada pelo destinatário</th>
+											
 							</tr>
 						</thead>
-							<?php
-								$q = mysqli_query($con, "SELECT * FROM `usuarios`");
-								
-								while($row = mysqli_fetch_assoc($q)){
-									$array[] = $row;
-								
-								}
-								foreach ($array as $row){
-									echo "<tr>";        
-									echo "<td>".$row['nome']."</td>";
-									echo "<td>********</td>";
-									echo "<td>".$row['num_matricula']."</td>";
-									echo "<td>".$row['email']."</td>";
-									if($row['professor']=="1"){
-										echo "<td><b>Sim</b></td>";
-									}else{
-										echo "<td>Não</td>";
-									}
-									
-									echo "<td><a href=http://localhost/projeto_msg/admin/editar_usuarios.php?id=".$row['id']."><span class='glyphicon glyphicon-edit'></span></a></td>";
-									echo "<td style='color:red'><a href=http://localhost/projeto_msg/admin/excluir_usuarios.php?id=".$row['id']."><span class='glyphicon glyphicon-remove'></span></a></td>";
+						<?php
+						$q3 = mysqli_query($con, "SELECT `usuario_destino`,`mensagens`,`timestamp`,`lida` FROM `mensagens` 
+						WHERE `usuario_envio`='$usuario_conversa'");
 
-									echo "</tr>";
-							
-								}
-						}	
+						
+						while($row = mysqli_fetch_assoc($q3)){
+							echo "<tr>";        
+							echo "<td>".$row['usuario_destino']."</td>";
+							echo "<td>".$row['mensagens']."</td>";
+							echo "<td>".$row['timestamp']."</td>";
+							if($row['lida'] == "1"){
+								echo "<td><b>Sim</b></td>";
+							}else{
+								echo "<td>Não</td>";
+							}
+							echo "</tr>";
+					
+						}
+		}	
 						?>
 
-				</table>
+		</table>
 </html>
 
 
