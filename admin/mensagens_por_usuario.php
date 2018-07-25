@@ -45,7 +45,6 @@ $con = conectar();
 					<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mensagens <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="#">Visualizar mensagens por conversa</a></li>
 						<li><a href="http://localhost/projeto_msg/admin/mensagens_por_usuario.php">Visualizar mensagens por usuario</a></li>
 					
 					</ul>
