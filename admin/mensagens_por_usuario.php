@@ -78,11 +78,11 @@ $con = conectar();
 						foreach ($array as $row){
 							if($row['professor']==1){
 						?>
-							<option value=<?php echo $row['id'];?> >Nome: <?php echo $row['nome'];?> - Número de matrícula: <?php echo $row['senha'];?> - Professor: sim </option>
+							<option value=<?php echo $row['id'];?> >Nome: <?php echo $row['nome'];?> - Número de matrícula: <?php echo $row['num_matricula'];?> - É Professor: sim </option>
 						<?php
 						}else{
 							?>
-							<option value=<?php echo $row['id'];?> >Nome: <?php echo $row['nome'];?> - Número de matrícula: <?php echo $row['senha'];?> - Professor: não </option>
+							<option value=<?php echo $row['id'];?> >Nome: <?php echo $row['nome'];?> - Número de matrícula: <?php echo $row['num_matricula'];?> - É Professor: não </option>
 							<?php
 						}
 						}
@@ -90,6 +90,8 @@ $con = conectar();
 						?>
 					</select>
 				</select>
+				<br>
+				<br>
 			<button type="submit" class="btn btn-primary" name="verificar">Verificar</button>
 			</form>
 		</div>
@@ -108,7 +110,8 @@ $con = conectar();
 					<caption class="text-center"><b><h4>Mensagens enviadas por <?php echo $nome_remet; ?></h4></b></caption>
 						<thead class="thead-dark">
 							<tr>
-								<th scope="col"> Destinatário</th>
+								<th scope="col"> ID do destinatário</th>
+								<th scope="col"> Nome do destinatário</th>
 								<th scope="col"> Mensagem</th>
 								<th scope="col"> Horário de envio</th>
 								<th scope="col"> Visualizada pelo destinatário</th>
@@ -121,11 +124,20 @@ $con = conectar();
 
 						
 						while($row = mysqli_fetch_assoc($q3)){
+							$id_usuario_destino = $row['usuario_destino'];
+							$mensagem = $row['mensagens'];
+							$timestamp = $row['timestamp'];
+							$lida = $row['lida'];
+							$q4 = mysqli_query($con, "SELECT `nome` FROM `usuarios` WHERE `id`='$id_usuario_destino'");
+							while($row = mysqli_fetch_assoc($q4)){
+								$nome_dest = $row['nome'];
+							}
 							echo "<tr>";        
-							echo "<td>".$row['usuario_destino']."</td>";
-							echo "<td>".$row['mensagens']."</td>";
-							echo "<td>".$row['timestamp']."</td>";
-							if($row['lida'] == "1"){
+							echo "<td align='center'>".$id_usuario_destino."</td>";
+							echo "<td>".$nome_dest."</td>";
+							echo "<td>".$mensagem."</td>";
+							echo "<td>".$timestamp."</td>";
+							if($lida == "1"){
 								echo "<td><b>Sim</b></td>";
 							}else{
 								echo "<td>Não</td>";
