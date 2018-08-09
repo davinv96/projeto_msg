@@ -66,7 +66,7 @@ $con = conectar();
 		</body>
 		<div id="form_conversas" class="container-fluid" align="center">
 			<p align="center">Selecione o usuário para consultar as conversas<p>
-				<form name="cadastro-usuario" action="" method="POST">
+				<form name="cadastro-usuario" action="" method="GET">
 					<select name="usuario_conversa">
 
 						<?php
@@ -96,8 +96,8 @@ $con = conectar();
 			</form>
 		</div>
 		<?php
-		if(isset($_POST['usuario_conversa'])){
-			$usuario_conversa = $_POST['usuario_conversa'];
+		if(isset($_GET['usuario_conversa'])){
+			$usuario_conversa = $_GET['usuario_conversa'];
 			$q1 = mysqli_query($con, "SELECT nome FROM `usuarios` WHERE id='$usuario_conversa'");
 
 			while($row = mysqli_fetch_assoc($q1)){
@@ -108,6 +108,14 @@ $con = conectar();
 		?>
 		<table class="table">
 					<caption class="text-center"><b><h4>Mensagens enviadas por <?php echo $nome_remet; ?></h4></b></caption>
+					<br>
+					<br>
+					<center>
+						<input type="button" class="btn-success" value="Exportar Conversa" onclick="location.href = 
+						'http://localhost/projeto_msg/admin/pdf_from_url.php?usuario_conversa=<?php echo $usuario_conversa;?>';">
+					</center>
+					<br>
+					<br>
 						<thead class="thead-dark">
 							<tr>
 								<th scope="col"> ID do destinatário</th>
