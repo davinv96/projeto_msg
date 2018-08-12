@@ -2,7 +2,8 @@
 include("../includes/banco.php"); 
 $con = conectar();
 $usuario_conversa = $_GET['id'];
-    
+ob_start();
+
 ?>
 <!DOCTYPE html>
 <html>

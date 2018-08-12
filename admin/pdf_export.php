@@ -1,8 +1,7 @@
 <?php 
 include("../includes/banco.php"); 
 $con = conectar();
-
-    
+$usuario_conversa = $_GET['id'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -64,40 +63,8 @@ $con = conectar();
 			</div><!-- /.container-fluid -->
 			</nav>
 		</body>
-		<div id="form_conversas" class="container-fluid" align="center">
-			<p align="center">Selecione o usuário para consultar as conversas<p>
-				<form name="cadastro-usuario" action="" method="GET">
-					<select name="usuario_conversa">
-
-						<?php
-						$q = mysqli_query($con, "SELECT * FROM `usuarios`");
-									
-						while($row = mysqli_fetch_assoc($q)){
-							$array[] = $row;		
-						}
-						foreach ($array as $row){
-							if($row['professor']==1){
-						?>
-							<option value=<?php echo $row['id'];?> >Nome: <?php echo $row['nome'];?> - Número de matrícula: <?php echo $row['num_matricula'];?> - É Professor: sim </option>
-						<?php
-						}else{
-							?>
-							<option value=<?php echo $row['id'];?> >Nome: <?php echo $row['nome'];?> - Número de matrícula: <?php echo $row['num_matricula'];?> - É Professor: não </option>
-							<?php
-						}
-						}
-
-						?>
-					</select>
-				</select>
-				<br>
-				<br>
-			<button type="submit" class="btn btn-primary" name="verificar">Verificar</button>
-			</form>
-		</div>
 		<?php
-		if(isset($_GET['usuario_conversa'])){
-			$usuario_conversa = $_GET['usuario_conversa'];
+		if(isset($usuario_conversa)){
 			$q1 = mysqli_query($con, "SELECT nome FROM `usuarios` WHERE id='$usuario_conversa'");
 
 			while($row = mysqli_fetch_assoc($q1)){
@@ -111,9 +78,6 @@ $con = conectar();
 					<br>
 					<br>
 					<center>
-					<a href="http://localhost/projeto_msg/admin/example_001.php?id=<?php echo $usuario_conversa;?>">
-					Exportar conversa <span class="glyphicon glyphicon-export"></span></a></li>
-					</center>
 					<br>
 					<br>
 						<thead class="thead-dark">
@@ -141,6 +105,7 @@ $con = conectar();
 							while($row = mysqli_fetch_assoc($q4)){
 								$nome_dest = $row['nome'];
 							}
+							
 							echo "<tr>";     
 							echo "<td align='center'>".$id_usuario_destino."</td>";
 							echo "<td>".$nome_dest."</td>";
@@ -155,6 +120,7 @@ $con = conectar();
 					
 						}
 		}	
+
 						?>
 						</tbody>
 
