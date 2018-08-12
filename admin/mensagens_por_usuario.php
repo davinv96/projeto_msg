@@ -16,7 +16,7 @@ $con = conectar();
 		<script type="text/javascript" src="js/script.js"></script> 
 	
 	</head>
-		<body style="background:#eee;">
+	
 		
 		<nav class="navbar navbar-default">
 				<div class="container-fluid">
@@ -106,13 +106,13 @@ $con = conectar();
 			
 		
 		?>
-		<table class="table">
+		<table class="table table-bordered">
 					<caption class="text-center"><b><h4>Mensagens enviadas por <?php echo $nome_remet; ?></h4></b></caption>
 					<br>
 					<br>
 					<center>
-						<input type="button" class="btn-success" value="Exportar Conversa" onclick="location.href = 
-						'http://localhost/projeto_msg/admin/pdf_from_url.php?usuario_conversa=<?php echo $usuario_conversa;?>';">
+					<a href="http://localhost/projeto_msg/admin/example_001.php?id=<?php echo $usuario_conversa;?>">
+					Exportar conversa <span class="glyphicon glyphicon-export"></span></a></li>
 					</center>
 					<br>
 					<br>
@@ -126,6 +126,7 @@ $con = conectar();
 											
 							</tr>
 						</thead>
+						<tbody>
 						<?php
 						$q3 = mysqli_query($con, "SELECT `usuario_destino`,`mensagens`,`timestamp`,`lida` FROM `mensagens` 
 						WHERE `usuario_envio`='$usuario_conversa'");
@@ -140,7 +141,7 @@ $con = conectar();
 							while($row = mysqli_fetch_assoc($q4)){
 								$nome_dest = $row['nome'];
 							}
-							echo "<tr>";        
+							echo "<tr>";     
 							echo "<td align='center'>".$id_usuario_destino."</td>";
 							echo "<td>".$nome_dest."</td>";
 							echo "<td>".$mensagem."</td>";
@@ -155,6 +156,7 @@ $con = conectar();
 						}
 		}	
 						?>
+						</tbody>
 
 		</table>
 </html>
