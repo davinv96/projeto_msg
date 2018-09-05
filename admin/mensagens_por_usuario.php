@@ -111,7 +111,7 @@ $con = conectar();
 					<br>
 					<br>
 					<center>
-					<a href="http://localhost/projeto_msg/admin/example_001.php?id=<?php echo $usuario_conversa;?>">
+					<a href="http://localhost/projeto_msg/admin/gerar_pdf.php?id=<?php echo $usuario_conversa;?>">
 					Exportar conversa <span class="glyphicon glyphicon-export"></span></a></li>
 					</center>
 					<br>
