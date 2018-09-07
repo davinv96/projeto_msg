@@ -16,7 +16,7 @@ $con = conectar();
 		<script type="text/javascript" src="js/script.js"></script> 
 	
 	</head>
-		<body style="background:#eee;">
+		<body>
 		
 		<nav class="navbar navbar-default">
 				<div class="container-fluid">
@@ -63,7 +63,7 @@ $con = conectar();
 				</div><!-- /.navbar-collapse -->
 			</div><!-- /.container-fluid -->
 			</nav>
-			<div>
+			<div id="show-contacts">
 			<table class="table">
 			<caption class="text-center"><b><h4>Usuários do UlbraChat no momento</h4></b></caption>
 				<thead class="thead-dark">

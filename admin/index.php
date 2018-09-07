@@ -12,7 +12,7 @@ $con = conectar();
     <link rel="stylesheet" type="text/css" href="css/style.css">
  
 </head>
-	<body style="background:#eee;">
+	<body>
     
 		<div class="login-container">
 			<?php

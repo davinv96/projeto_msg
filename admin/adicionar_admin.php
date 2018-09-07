@@ -15,7 +15,7 @@ $con = conectar();
 		<script type="text/javascript" src="js/script.js"></script> 
 	
 	</head>
-		<body style="background:#eee;">
+		<body>
 		<nav class="navbar navbar-default">
 				<div class="container-fluid">
 				<!-- Brand and toggle get grouped for better mobile display -->
