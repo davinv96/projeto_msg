@@ -65,38 +65,16 @@ $con = conectar();
 			</nav>
 		</body>
 		<div id="form_conversas" class="container-fluid" align="center">
-			<p align="center">Selecione o usuário para consultar as conversas<p>
-				<form name="cadastro-usuario" action="" method="GET">
-					<select name="usuario_conversa">
-
-						<?php
-						$q = mysqli_query($con, "SELECT * FROM `usuarios`");
-									
-						while($row = mysqli_fetch_assoc($q)){
-							$array[] = $row;		
-						}
-						foreach ($array as $row){
-							if($row['professor']==1){
-						?>
-							<option value=<?php echo $row['id'];?> >Nome: <?php echo $row['nome'];?> - Número de matrícula: <?php echo $row['num_matricula'];?> - É Professor: sim </option>
-						<?php
-						}else{
-							?>
-							<option value=<?php echo $row['id'];?> >Nome: <?php echo $row['nome'];?> - Número de matrícula: <?php echo $row['num_matricula'];?> - É Professor: não </option>
-							<?php
-						}
-						}
-
-						?>
-					</select>
-				</select>
+			<p align="center">Digite abaixo o memorando que deseja enviar<p>
+				<form name="enviar-memorando" action="" method="GET">
+				<textarea cols="80" rows="5" placeholder="Todos os usuários da plataforma irão receber este texto"></textarea>
 				<br>
 				<br>
-			<button type="submit" class="btn btn-primary" name="verificar">Verificar</button>
+			<button type="submit" class="btn btn-primary" name="verificar">Enviar</button>
 			</form>
 		</div>
 		<?php
-		if(isset($_GET['usuario_conversa'])){
+		if(isset($_GET['enviar-memorando'])){
 			$usuario_conversa = $_GET['usuario_conversa'];
 			$q1 = mysqli_query($con, "SELECT nome FROM `usuarios` WHERE id='$usuario_conversa'");
 
