@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 08/09/2018 às 18:27
+-- Tempo de geração: 15/09/2018 às 03:25
 -- Versão do servidor: 10.1.30-MariaDB
 -- Versão do PHP: 7.2.1
 
@@ -73,19 +73,8 @@ INSERT INTO `conversas` (`id`, `usuario1`, `usuario2`) VALUES
 (11, 2, 4),
 (12, 0, 5),
 (13, 0, 1),
-(14, 4, 3);
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `memorando`
---
-
-CREATE TABLE `memorando` (
-  `id` int(11) NOT NULL,
-  `memorando` text COLLATE latin1_general_ci NOT NULL,
-  `data` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
+(14, 4, 3),
+(15, 1, 15);
 
 -- --------------------------------------------------------
 
@@ -179,19 +168,6 @@ INSERT INTO `mensagens` (`id`, `id_conversa`, `usuario_envio`, `usuario_destino`
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `notificacoes`
---
-
-CREATE TABLE `notificacoes` (
-  `id` int(11) NOT NULL,
-  `usuario1` int(11) NOT NULL,
-  `usuario2` int(11) NOT NULL,
-  `data` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Estrutura para tabela `usuarios`
 --
 
@@ -202,24 +178,21 @@ CREATE TABLE `usuarios` (
   `status` tinyint(1) NOT NULL DEFAULT '0',
   `num_matricula` text NOT NULL,
   `email` text NOT NULL,
-  `professor` tinyint(1) NOT NULL DEFAULT '0',
-  `coord` tinyint(1) NOT NULL DEFAULT '0'
+  `professor` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Fazendo dump de dados para tabela `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `nome`, `senha`, `status`, `num_matricula`, `email`, `professor`, `coord`) VALUES
-(1, 'Aluno', 'cc03e747a6afbbcbf8be7668acfebee5', 0, '11223344', 'aluno@aluno.com', 0, 0),
-(2, 'Professor', 'cc03e747a6afbbcbf8be7668acfebee5', 0, '22334455', 'prof@prof.com', 1, 0),
-(3, 'Aluno1', 'cc03e747a6afbbcbf8be7668acfebee5', 0, '8889900', 'aluno123@teste.com', 0, 0),
-(4, 'Professor1', 'cc03e747a6afbbcbf8be7668acfebee5', 0, '555900', 'prof123@teste.com', 1, 0),
-(14, 'Tchu', '74b87337454200d4d33f80c4663dc5e5', 0, 'aaa', 'davinv96@outlook.com', 1, 0),
-(15, 'Tchu', '74b87337454200d4d33f80c4663dc5e5', 0, 'aaa', 'davinv96@outlook.com', 1, 0),
-(18, 'Testando a parada', 'cc03e747a6afbbcbf8be7668acfebee5', 0, '11220000', 'opa@opa.com', 0, 0),
-(19, 'Jeca', '9dd6023e88f1e5bcf51415d2caa4e031', 0, '111113', 'jeca@jeca.com', 0, 0),
-(20, 'Coordenação', 'test123', 0, '00998877', 'coordenacao@ulbra.com', 1, 1);
+INSERT INTO `usuarios` (`id`, `nome`, `senha`, `status`, `num_matricula`, `email`, `professor`) VALUES
+(1, 'Aluno', 'cc03e747a6afbbcbf8be7668acfebee5', 0, '11223344', 'aluno@aluno.com', 0),
+(2, 'Professor', 'cc03e747a6afbbcbf8be7668acfebee5', 0, '22334455', 'prof@prof.com', 1),
+(3, 'Aluno1', 'cc03e747a6afbbcbf8be7668acfebee5', 0, '8889900', 'aluno123@teste.com', 0),
+(4, 'Professor1', 'cc03e747a6afbbcbf8be7668acfebee5', 0, '555900', 'prof123@teste.com', 1),
+(15, 'Tchu', '74b87337454200d4d33f80c4663dc5e5', 0, 'aaa', 'davinv96@outlook.com', 1),
+(18, 'Testando a parada', 'cc03e747a6afbbcbf8be7668acfebee5', 0, '11220000', 'opa@opa.com', 0),
+(19, 'Jeca', '9dd6023e88f1e5bcf51415d2caa4e031', 0, '111113', 'jeca@jeca.com', 0);
 
 --
 -- Índices de tabelas apagadas
@@ -238,22 +211,11 @@ ALTER TABLE `conversas`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices de tabela `memorando`
---
-ALTER TABLE `memorando`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Índices de tabela `mensagens`
 --
 ALTER TABLE `mensagens`
-  ADD PRIMARY KEY (`id`);
-
---
--- Índices de tabela `notificacoes`
---
-ALTER TABLE `notificacoes`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_conversa` (`id_conversa`);
 
 --
 -- Índices de tabela `usuarios`
@@ -275,13 +237,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT de tabela `conversas`
 --
 ALTER TABLE `conversas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
---
--- AUTO_INCREMENT de tabela `memorando`
---
-ALTER TABLE `memorando`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de tabela `mensagens`
@@ -290,16 +246,10 @@ ALTER TABLE `mensagens`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
--- AUTO_INCREMENT de tabela `notificacoes`
---
-ALTER TABLE `notificacoes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

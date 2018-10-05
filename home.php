@@ -82,7 +82,7 @@
 
             }else if($professor == 1){
             
-                $q = mysqli_query($con, "SELECT * FROM `usuarios` WHERE id!='$id_login' AND `professor` = 0");
+                $q = mysqli_query($con, "SELECT * FROM `usuarios` WHERE id!='$id_login' AND `professor` = 0 ");
                   
                 while($row = mysqli_fetch_assoc($q)){
                     $array[] = $row;
@@ -100,6 +100,8 @@
         
                     echo "</tr>";
                 }
+                
+
             }
         ?>
         </table>
@@ -144,6 +146,49 @@
             }
         ?>
        </table>
+       </div>
+       <div class="send-mass-msg" id="send-mass-msg">
+        <?php
+            if($professor == 1){
+                $q4 = mysqli_query($con, "SELECT * FROM usuarios WHERE id!='$id_login' AND professor = 0");
+                    
+                while($row = mysqli_fetch_assoc($q4)){
+                    $q = mysqli_query($con, "SELECT `id` FROM `usuarios` WHERE id=".$row['id']." AND id!='$id_login' and `professor` = 0");
+                    if(mysqli_num_rows($q) == 1){
+                        $conver = mysqli_query($con, "SELECT * FROM conversas WHERE (usuario1='$id_login' AND usuario2=".$row['id'].") OR (usuario1='".$row['id']."' AND ".$row['id']."='$id_login')"); 
+                        if(mysqli_num_rows($conver) == 1){                           
+                            $fetch = mysqli_fetch_assoc($conver);
+                            $id_conversa = $fetch['id'];
+                        }else{ 
+                        
+                            $q = mysqli_query($con, "INSERT INTO conversas VALUES ('','$id_login',".$row['id']."");
+                            $id_conversa = mysqli_insert_id($con);
+                        }
+                    }
+            
+                }
+                ?>
+                <caption><b>Envio de mensagens em massa</b></caption>
+                <div class="send-message" id="send-message">
+                    
+                    <input type="hidden" id="id_conversa" value="<?php echo $id_conversa; ?>">
+                    <input type="hidden" id="usuario_envio_msg" value="<?php echo $id_login; ?>">
+                    <input type="hidden" id="usuario_destino" value="<?php echo $usuario2; ?>">
+                    <div class="form-group">
+                        <textarea class="form-control" id="mensagem" placeholder="Todos os alunos irão receber esta mensagem"></textarea>
+                    </div>
+                    <button class="btn btn-primary" id="enviar">Enviar</button> 
+                    <span id="error"></span>
+                </div>
+                <?php
+            
+        
+                
+            }
+        
+            
+            
+        ?>
 		</div>
 	</body>
 

@@ -4,12 +4,19 @@
 	
     session_start();
     
+    /*
+        Se existir um id válido de sessão, o usuário continuará na página
+        Caso o id não exista, o usuário será redirecionado a página de autenticação
+    */
     if(isset($_SESSION['id'])){
         $id_login = $_SESSION['id'];
        
     }else{
         header("Location: index.php");
     }
+    /*
+
+    */
     mysqli_query($con, "UPDATE `usuarios` SET `status`= 1 WHERE `id` ='$id_login'");
 
     if(isset($_GET['id'])){
@@ -72,7 +79,7 @@
                         die("Erro no ID.");
                     }
                 }else {
-                    die("<center>Clique na aba contatos com quem deseja falar.</center>");
+                    die("Erro");
                 }
 				?>
            
