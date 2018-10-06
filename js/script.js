@@ -14,6 +14,12 @@ $(document).ready(function(){
             });
         }
     });
+
+
+    
+
+
+
  
     
     c_id = $("#id_conversa").val();
