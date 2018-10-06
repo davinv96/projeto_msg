@@ -153,15 +153,18 @@
                 $q4 = mysqli_query($con, "SELECT * FROM usuarios WHERE id!='$id_login' AND professor = 0");
                     
                 while($row = mysqli_fetch_assoc($q4)){
-                    $q = mysqli_query($con, "SELECT `id` FROM `usuarios` WHERE id=".$row['id']." AND id!='$id_login' and `professor` = 0");
+                    $usuario2 =  $row['id'];
+                    $q = mysqli_query($con, "SELECT `id` FROM `usuarios` WHERE id='$usuario2' AND id!='$id_login'");
                     if(mysqli_num_rows($q) == 1){
-                        $conver = mysqli_query($con, "SELECT * FROM conversas WHERE (usuario1='$id_login' AND usuario2=".$row['id'].") OR (usuario1='".$row['id']."' AND ".$row['id']."='$id_login')"); 
-                        if(mysqli_num_rows($conver) == 1){                           
+                        
+                        $conver = mysqli_query($con, "SELECT * FROM conversas WHERE (usuario1='$id_login' AND usuario2='$usuario2') OR (usuario1='$usuario2' AND usuario2='$id_login')"); 
+                        echo $usuario2."<br>";
+                        if(mysqli_num_rows($conver) > 0){                           
                             $fetch = mysqli_fetch_assoc($conver);
                             $id_conversa = $fetch['id'];
                         }else{ 
-                        
-                            $q = mysqli_query($con, "INSERT INTO conversas VALUES ('','$id_login',".$row['id']."");
+                           
+                            $q = mysqli_query($con, "INSERT INTO conversas VALUES ('','$id_login',$usuario2)");
                             $id_conversa = mysqli_insert_id($con);
                         }
                     }
