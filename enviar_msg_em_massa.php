@@ -56,18 +56,16 @@
 		       
             <!-- send message -->
             <form action="enviar_msg_em_massa.php" method="post" >
-            <div class="send-message1" id="send-message1">
-                <input type="hidden" id="usuario_envio_msg" value="<?php echo $id_login; ?>">
-
-                    <textarea class="form-control" id="mensagem1" placeholder="Envie sua Mensagem"></textarea>
-                </div>
+            
+            <textarea name="mensagem1" ></textarea>
+            
                 <input type="submit" value="enviar1"  name="enviar1" class="btn btn-primary btn-block">
                 <span id="error"></span>
-            </div>
+           
             </form>
             <!-- / send message -->
       
-		</div>		
+		
 	</body>
 
 </html>
@@ -76,9 +74,8 @@ if(isset($_POST['enviar1'])){
     echo "aaaaaaaaaa";
  $q = mysqli_query($con, "SELECT * FROM `usuarios` WHERE id!='$id_login' AND `professor` = 0 ");
  $mensagem = mysqli_real_escape_string($con, $_POST['mensagem1']);
- $usuario_envio_msg = mysqli_real_escape_string($con, $_POST['usuario_envio_msg']);
- $usuario_logado = mysqli_real_escape_string($con, $_POST['usuario_logado']);
- 
+ $usuario_envio_msg = $id_login;
+
  while($row = mysqli_fetch_assoc($q)){
      $array[] = $row;
 
