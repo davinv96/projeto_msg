@@ -33,7 +33,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>UlbraChat - Conversa</title>
+        <title>UlbraChat - Mensagens em massa</title>
         <link rel="icon" href="img/logo.png" type="image/x-icon" />
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -47,31 +47,34 @@
             <div class="container-fluid" id="show-info">
             <!-- Brand and toggle get grouped for better mobile display -->
            
-
+            <div class="navbar-header">
+                    
+                    <a class="navbar-brand" >Envio de mensagens em massa para alunos</a>
+                   
+                </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             
 			</div><!-- /.container-fluid -->
 		</nav>
-     
-		       
+        <div align="center">		       
             <!-- send message -->
             <form action="enviar_msg_em_massa.php" method="post" >
+            <b>A mensagem abaixo será enviada para todos os alunos cadastrados na plataforma</b><br>
+            <textarea rows="4" cols="50" name="mensagem1" ></textarea><br>
             
-            <textarea name="mensagem1" ></textarea>
-            
-                <input type="submit" value="enviar1"  name="enviar1" class="btn btn-primary btn-block">
+                <input type="submit" value="Enviar"  name="enviar1" class="btn btn-primary">
                 <span id="error"></span>
            
             </form>
             <!-- / send message -->
-      
+        </div> 
 		
 	</body>
 
 </html>
 <?php
 if(isset($_POST['enviar1'])){
-    echo "aaaaaaaaaa";
+    
  $q = mysqli_query($con, "SELECT * FROM `usuarios` WHERE id!='$id_login' AND `professor` = 0 ");
  $mensagem = mysqli_real_escape_string($con, $_POST['mensagem1']);
  $usuario_envio_msg = $id_login;
@@ -101,15 +104,16 @@ if(isset($_POST['enviar1'])){
      
      $q = mysqli_query($con, "INSERT INTO mensagens (`id_conversa`, `usuario_envio`, `usuario_destino`, `mensagens`)
      VALUES ('$id_conversa','$usuario_envio_msg','$usuario2','$mensagem')");
-     if($q){
+     /*if($q){
          echo "Enviado!";
      }else{
          echo "Erro no envio";
-     }
+     }*/
  }
         
-}else{
+/*}else{
     echo "bbbbbbbb";
+*/
 }
 
  

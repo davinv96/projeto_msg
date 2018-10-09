@@ -147,34 +147,7 @@
         ?>
        </table>
        </div>
-       <div class="send-mass-msg" id="send-mass-msg">
-        <?php
-            if($professor == 1){
-               
-                
-                ?>
-                <caption><b>Envio de mensagens em massa</b></caption>
-                <div class="send-message" id="send_mass_message">
-                    
-                    
-                    <input type="hidden" id="usuario_envio_msg" value="<?php echo $id_login; ?>">
-                   
-                    <div class="form-group">
-                        <textarea class="form-control" id="mensagem_em_massa" placeholder="Todos os alunos irão receber esta mensagem"></textarea>
-                    </div>
-                    <button class="btn btn-primary" id="enviar_em_massa">Enviar</button> 
-                    <span id="error"></span>
-                </div>
-                <?php
             
-        
-                
-            }
-        
-            
-            
-        ?>
-		</div>
 	</body>
 
 </html>
