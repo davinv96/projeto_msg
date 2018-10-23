@@ -101,6 +101,7 @@
                     echo "</tr>";
                 }
                 
+                
 
             }
         ?>
@@ -146,8 +147,17 @@
             }
         ?>
        </table>
+
        </div>
-            
+       <?php
+        if($professor == 1){
+       ?>
+                <div>
+                    <a target='_blank' href="http://localhost/projeto_msg/enviar_msg_em_massa.php">  Enviar mensagem para todos os alunos <span class="glyphicon glyphicon-share-alt"></span></a>
+                </div>
+        <?php
+        }
+        ?>
 	</body>
 
 </html>
