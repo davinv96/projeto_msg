@@ -58,10 +58,28 @@
 		</nav>
         <div align="center">		       
             <!-- send message -->
-            <form action="enviar_msg_em_massa.php" method="post" >
-            <b>A mensagem abaixo será enviada para todos os alunos cadastrados na plataforma</b><br>
-            <textarea rows="4" cols="50" name="mensagem1" ></textarea><br>
-            
+            <form action="enviar_msg_em_massa_disciplina.php" method="post" >
+				<b>A mensagem abaixo será enviada para todos os alunos vinculados a disciplina selecionada abaixo</b><br>
+				<textarea rows="4" cols="50" name="mensagem1" ></textarea><br>
+				<?php
+				$q = mysqli_query($con, "SELECT * FROM `disciplina`");
+				while($row = mysqli_fetch_assoc($q)){
+					$array[] = $row;
+
+				}
+				
+				?>
+				Disciplina dos alunos:
+				<select name="disciplina">
+				
+				 <?php
+					foreach ($array as $row){
+						echo "<option value='{$row['id']}'>{$row['nome']}</option>";
+					}
+				  ?>
+				</select><br>
+				<br>
+				
                 <input type="submit" value="Enviar"  name="enviar1" class="btn btn-primary">
                 <span id="error"></span>
            
@@ -74,17 +92,28 @@
 </html>
 <?php
 if(isset($_POST['enviar1'])){
-    
- $q = mysqli_query($con, "SELECT * FROM `usuarios` WHERE id!='$id_login' AND `professor` = 0 ");
+ $disciplina = $_POST['disciplina'];  
+ 
  $mensagem = mysqli_real_escape_string($con, $_POST['mensagem1']);
  $usuario_envio_msg = $id_login;
-
+ $q = mysqli_query($con, "SELECT * FROM `usuarios` WHERE id!='$id_login' AND `professor` = 0 ");
+ 
  while($row = mysqli_fetch_assoc($q)){
      $array[] = $row;
 
  }
+ 
  foreach ($array as $row){
-    $usuario2 = $row['id'];
+	 $user = $row['id'];
+	 $q1 = mysqli_query($con, "SELECT * FROM `usuarios_has_disciplina` WHERE `usuarios_id` = '$user' and `disciplina_id` =$disciplina");
+	 while($row = mysqli_fetch_assoc($q1)){
+		$array1[] = $row;
+
+	}
+ }
+
+ foreach ($array1 as $row){
+    $usuario2 = $row['usuarios_id'];
     $q = mysqli_query($con, "SELECT `id` FROM `usuarios` WHERE id='$usuario2' AND id!='$id_login'");
     if(mysqli_num_rows($q) == 1){
         $conver = mysqli_query($con, "SELECT * FROM conversas WHERE (usuario1='$id_login' AND usuario2='$usuario2') OR (usuario1='$usuario2' AND usuario2='$id_login')"); 
@@ -104,6 +133,8 @@ if(isset($_POST['enviar1'])){
      
      $q = mysqli_query($con, "INSERT INTO mensagens (`id_conversa`, `usuario_envio`, `usuario_destino`, `mensagens`)
      VALUES ('$id_conversa','$usuario_envio_msg','$usuario2','$mensagem')");
+	 
+	 
      /*if($q){
          echo "Enviado!";
      }else{
