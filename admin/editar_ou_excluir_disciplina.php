@@ -73,20 +73,17 @@ $con = conectar();
 		</body>
 
 		<table class="table">
-			<caption class="text-center"><b><h4>Lista dos Administradores</h4></b></caption>
+			<caption class="text-center"><b><h4>Lista de Disciplinas</h4></b></caption>
 				<thead class="thead-dark">
 					<tr>
 						<th scope="col"> Nome</th>
-						<th scope="col"> Senha</th>
-						<th scope="col"> Email</th>
-						<th scope="col"> Editar</th>
-						<th scope="col"> Excluir</th>
+						
 
 				
 					</tr>
 				</thead>
 					<?php
-						$q = mysqli_query($con, "SELECT * FROM `admin`");
+						$q = mysqli_query($con, "SELECT * FROM `disciplina`");
 						
 						while($row = mysqli_fetch_assoc($q)){
 							$array[] = $row;
@@ -94,12 +91,11 @@ $con = conectar();
 						}
 						foreach ($array as $row){
 							echo "<tr>";        
-							echo "<td>".$row['nome']."</td>";
-							echo "<td>********</td>";
-							echo "<td>".$row['email']."</td>";
+							echo "<td>".$row['nome_disc']."</td>";
 							
-							echo "<td><a href=http://localhost/projeto_msg/admin/editar_admin.php?id=".$row['id']."><span class='glyphicon glyphicon-edit'></span></a></td>";
-							echo "<td style='color:red'><a href=http://localhost/projeto_msg/admin/excluir_admin.php?id=".$row['id']."><span class='glyphicon glyphicon-remove'></span></a></td>";
+							
+							echo "<td><a href=http://localhost/projeto_msg/admin/editar_disciplina.php?id_disc=".$row['id_disc']."><span class='glyphicon glyphicon-edit'></span></a></td>";
+							echo "<td style='color:red'><a href=http://localhost/projeto_msg/admin/excluir_disciplina.php?id_disc=".$row['id_disc']."><span class='glyphicon glyphicon-remove'></span></a></td>";
 
 							echo "</tr>";
 					

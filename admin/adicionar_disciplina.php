@@ -70,41 +70,33 @@ $con = conectar();
 					</div><!-- /.navbar-collaps
 			</div><!-- /.container-fluid -->
 			</nav>
-		</body>
 
-		<table class="table">
-			<caption class="text-center"><b><h4>Lista dos Administradores</h4></b></caption>
-				<thead class="thead-dark">
-					<tr>
-						<th scope="col"> Nome</th>
-						<th scope="col"> Senha</th>
-						<th scope="col"> Email</th>
-						<th scope="col"> Editar</th>
-						<th scope="col"> Excluir</th>
-
+			<form name="cadastro-disciplina" action="" method="POST">
+				<div class="form-group">
+					<label for="exampleInputEmail1">Nome da disciplina</label>
+					<input type="text" class="form-control" id="nome_usuario" name="nome" placeholder="Digite o nome da disciplina" required>
+				</div>
 				
-					</tr>
-				</thead>
-					<?php
-						$q = mysqli_query($con, "SELECT * FROM `admin`");
-						
-						while($row = mysqli_fetch_assoc($q)){
-							$array[] = $row;
-						
-						}
-						foreach ($array as $row){
-							echo "<tr>";        
-							echo "<td>".$row['nome']."</td>";
-							echo "<td>********</td>";
-							echo "<td>".$row['email']."</td>";
-							
-							echo "<td><a href=http://localhost/projeto_msg/admin/editar_admin.php?id=".$row['id']."><span class='glyphicon glyphicon-edit'></span></a></td>";
-							echo "<td style='color:red'><a href=http://localhost/projeto_msg/admin/excluir_admin.php?id=".$row['id']."><span class='glyphicon glyphicon-remove'></span></a></td>";
-
-							echo "</tr>";
-					
-						}
-
-				?>
-        </table>
+				<button type="reset" class="btn btn-danger">Limpar</button>		
+ 				<button type="submit" class="btn btn-primary" name="cadastrar">Cadastrar</button>
+			</form>
+		</body>
 </html>
+<?php
+	if(isset($_POST['cadastrar'])){
+ 		$nome = $_POST["nome"];
+ 		
+
+	
+		$resultado = mysqli_query($con, "INSERT INTO disciplina (nome_disc) VALUES ('$nome')");
+		if(mysqli_affected_rows($con)>0){
+			echo "<script>alert('Disciplina cadastrada com sucesso!');</script>";
+				
+		}else{
+			echo "<script>alert('Erro no cadastro!');</script>";
+
+		}
+		
+	}
+
+?>

@@ -101,14 +101,14 @@ $usuario_conversa = $_GET['id'];
 							$mensagem = $row['mensagens'];
 							$timestamp = $row['timestamp'];
 							$lida = $row['lida'];
-							$q4 = mysqli_query($con, "SELECT `nome` FROM `usuarios` WHERE `id`='$id_usuario_destino'");
+							/*$q4 = mysqli_query($con, "SELECT `nome` FROM `usuarios` WHERE `id`='$id_usuario_destino'");
 							while($row = mysqli_fetch_assoc($q4)){
 								$nome_dest = $row['nome'];
 							}
-							
+							*/
 							echo "<tr>";     
 							echo "<td align='center'>".$id_usuario_destino."</td>";
-							echo "<td>".$nome_dest."</td>";
+							//echo "<td>".$nome_dest."</td>";
 							echo "<td>".$mensagem."</td>";
 							echo "<td>".$timestamp."</td>";
 							if($lida == "1"){

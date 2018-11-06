@@ -70,41 +70,67 @@ $con = conectar();
 					</div><!-- /.navbar-collaps
 			</div><!-- /.container-fluid -->
 			</nav>
-		</body>
 
-		<table class="table">
-			<caption class="text-center"><b><h4>Lista dos Administradores</h4></b></caption>
-				<thead class="thead-dark">
-					<tr>
-						<th scope="col"> Nome</th>
-						<th scope="col"> Senha</th>
-						<th scope="col"> Email</th>
-						<th scope="col"> Editar</th>
-						<th scope="col"> Excluir</th>
+			<form name="vincula-disc" action="vincular_disciplina.php" method="POST">
+				<?php
+				$q = mysqli_query($con, "SELECT * FROM `usuarios` WHERE professor = 0");
+				while($row = mysqli_fetch_assoc($q)){
+					$array[] = $row;
 
+				}
 				
-					</tr>
-				</thead>
-					<?php
-						$q = mysqli_query($con, "SELECT * FROM `admin`");
-						
-						while($row = mysqli_fetch_assoc($q)){
-							$array[] = $row;
-						
-						}
-						foreach ($array as $row){
-							echo "<tr>";        
-							echo "<td>".$row['nome']."</td>";
-							echo "<td>********</td>";
-							echo "<td>".$row['email']."</td>";
-							
-							echo "<td><a href=http://localhost/projeto_msg/admin/editar_admin.php?id=".$row['id']."><span class='glyphicon glyphicon-edit'></span></a></td>";
-							echo "<td style='color:red'><a href=http://localhost/projeto_msg/admin/excluir_admin.php?id=".$row['id']."><span class='glyphicon glyphicon-remove'></span></a></td>";
-
-							echo "</tr>";
-					
-						}
-
 				?>
-        </table>
+				Aluno:
+				<select name="aluno">
+				
+				 <?php
+					foreach ($array as $row){
+						echo "<option value='{$row['id']}'>{$row['nome']}</option>";
+					}
+				  ?>
+				</select><br>
+				<br>
+				
+				<?php
+				$q1 = mysqli_query($con, "SELECT * FROM `disciplina`");
+				while($row = mysqli_fetch_assoc($q1)){
+					$array1[] = $row;
+
+				}
+				
+				?>
+				Disciplina:
+				<select name="disciplina">
+				
+				 <?php
+					foreach ($array1 as $row){
+						echo "<option value='{$row['id_disc']}'>{$row['nome_disc']}</option>";
+					}
+				  ?>
+				</select><br>
+				<br>
+				
+ 				<button type="submit" class="btn btn-primary" name="vincular">Vincular</button>
+			</form>
+		</body>
 </html>
+<?php
+	if(isset($_POST['vincular'])){
+ 		$id_aluno = $_POST["aluno"];
+ 		$id_disc  = $_POST["disciplina"];
+		
+		$q = mysqli_query($con, "INSERT INTO `usuarios_has_disciplina`(`usuarios_id`, `disciplina_id`) VALUES ('$id_aluno','$id_disc')");
+		if(mysqli_affected_rows($con)>0){
+			echo "<script>alert('Aluno vinculado a disciplina selecionada!');";
+			echo "javascript:window.location='http://localhost/projeto_msg/admin/vincular_disciplina.php';</script>";
+		}else{				
+			echo "<script>alert('Erro no processo de vinculação!');";
+			echo "javascript:window.location='http://localhost/projeto_msg/admin/vincular_disciplina.php';</script>";
+
+
+		}
+		
+
+	}
+
+?>

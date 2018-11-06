@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 15/09/2018 às 03:25
+-- Generation Time: 05-Nov-2018 às 18:05
 -- Versão do servidor: 10.1.30-MariaDB
--- Versão do PHP: 7.2.1
+-- PHP Version: 7.2.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `mensageiro`
+-- Database: `mensageiro`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `admin`
+-- Estrutura da tabela `admin`
 --
 
 CREATE TABLE `admin` (
@@ -36,17 +36,16 @@ CREATE TABLE `admin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci;
 
 --
--- Fazendo dump de dados para tabela `admin`
+-- Extraindo dados da tabela `admin`
 --
 
 INSERT INTO `admin` (`id`, `nome`, `senha`, `email`) VALUES
-(1, 'admin', 'cc03e747a6afbbcbf8be7668acfebee5', 'admin@admin.com'),
-(2, 'Admin1', 'cc03e747a6afbbcbf8be7668acfebee5', 'test@test.com');
+(1, 'admin', 'cc03e747a6afbbcbf8be7668acfebee5', 'admin@admin.com');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `conversas`
+-- Estrutura da tabela `conversas`
 --
 
 CREATE TABLE `conversas` (
@@ -56,7 +55,7 @@ CREATE TABLE `conversas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Fazendo dump de dados para tabela `conversas`
+-- Extraindo dados da tabela `conversas`
 --
 
 INSERT INTO `conversas` (`id`, `usuario1`, `usuario2`) VALUES
@@ -74,12 +73,33 @@ INSERT INTO `conversas` (`id`, `usuario1`, `usuario2`) VALUES
 (12, 0, 5),
 (13, 0, 1),
 (14, 4, 3),
-(15, 1, 15);
+(15, 1, 15),
+(39, 2, 18),
+(40, 2, 19);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `mensagens`
+-- Estrutura da tabela `disciplina`
+--
+
+CREATE TABLE `disciplina` (
+  `id_disc` int(11) NOT NULL,
+  `nome_disc` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `disciplina`
+--
+
+INSERT INTO `disciplina` (`id_disc`, `nome_disc`) VALUES
+(1, 'Disciplina I'),
+(4, 'Disciplina II');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `mensagens`
 --
 
 CREATE TABLE `mensagens` (
@@ -93,7 +113,7 @@ CREATE TABLE `mensagens` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Fazendo dump de dados para tabela `mensagens`
+-- Extraindo dados da tabela `mensagens`
 --
 
 INSERT INTO `mensagens` (`id`, `id_conversa`, `usuario_envio`, `usuario_destino`, `mensagens`, `timestamp`, `lida`) VALUES
@@ -163,12 +183,62 @@ INSERT INTO `mensagens` (`id`, `id_conversa`, `usuario_envio`, `usuario_destino`
 (64, 10, 2, 3, 'OlÃ¡ Aluno1, boa noite', '2018-06-02 00:16:18', 1),
 (65, 1, 1, 2, 'OlÃ¡', '2018-06-06 19:44:53', 1),
 (66, 1, 1, 2, 'Teste', '2018-07-28 00:41:01', 1),
-(67, 1, 2, 1, 'Opa, boa noite', '2018-08-30 23:01:01', 1);
+(67, 1, 2, 1, 'Opa, boa noite', '2018-08-30 23:01:01', 1),
+(68, 1, 2, 1, 'olÃ¡', '2018-10-01 20:04:59', 1),
+(108, 30, 2, 1, 'teste', '2018-10-06 17:28:57', 1),
+(109, 10, 2, 3, 'teste', '2018-10-06 17:28:57', 1),
+(110, 17, 2, 18, 'teste', '2018-10-06 17:28:57', 1),
+(111, 18, 2, 19, 'teste', '2018-10-06 17:28:57', 1),
+(117, 37, 2, 1, 'teste', '2018-10-08 23:20:20', 1),
+(118, 1, 2, 1, 'teste', '2018-10-09 00:34:58', 1),
+(119, 10, 2, 3, 'teste', '2018-10-09 00:34:58', 1),
+(120, 39, 2, 18, 'teste', '2018-10-09 00:34:58', 1),
+(121, 40, 2, 19, 'teste', '2018-10-09 00:34:58', 1),
+(122, 1, 2, 1, 'Boa noite a todos,\r\nNÃ£o comparecerei a aula de hoje devido a motivos pessoais', '2018-10-25 01:18:50', 1),
+(123, 10, 2, 3, 'Boa noite a todos,\r\nNÃ£o comparecerei a aula de hoje devido a motivos pessoais', '2018-10-25 01:18:50', 1),
+(124, 39, 2, 18, 'Boa noite a todos,\r\nNÃ£o comparecerei a aula de hoje devido a motivos pessoais', '2018-10-25 01:18:50', 1),
+(125, 40, 2, 19, 'Boa noite a todos,\r\nNÃ£o comparecerei a aula de hoje devido a motivos pessoais', '2018-10-25 01:18:50', 1),
+(126, 1, 1, 2, 'pppppp', '2018-10-26 23:06:37', 1),
+(127, 1, 2, 1, 'iuuuuyy', '2018-10-26 23:08:25', 1),
+(128, 10, 2, 3, 'iuuuuyy', '2018-10-26 23:08:25', 1),
+(129, 39, 2, 18, 'iuuuuyy', '2018-10-26 23:08:25', 1),
+(130, 40, 2, 19, 'iuuuuyy', '2018-10-26 23:08:25', 0),
+(131, 1, 2, 1, 'teste', '2018-11-02 20:20:06', 1),
+(132, 10, 2, 3, 'teste', '2018-11-02 20:20:06', 1),
+(133, 39, 2, 18, 'teste', '2018-11-02 20:20:06', 1),
+(134, 40, 2, 19, 'teste', '2018-11-02 20:20:06', 0),
+(135, 1, 2, 1, 'teste', '2018-11-02 20:20:15', 1),
+(136, 10, 2, 3, 'teste', '2018-11-02 20:20:15', 1),
+(137, 39, 2, 18, 'teste', '2018-11-02 20:20:15', 1),
+(138, 40, 2, 19, 'teste', '2018-11-02 20:20:15', 0),
+(139, 1, 2, 1, 'aa', '2018-11-02 20:20:53', 1),
+(140, 1, 2, 1, 'aa', '2018-11-02 20:20:53', 1),
+(141, 10, 2, 3, 'aa', '2018-11-02 20:20:53', 1),
+(142, 39, 2, 18, 'aa', '2018-11-02 20:20:53', 1),
+(143, 40, 2, 19, 'aa', '2018-11-02 20:20:53', 0),
+(144, 1, 2, 1, 'teste', '2018-11-02 20:24:18', 1),
+(145, 1, 2, 1, 'aaa', '2018-11-02 20:40:22', 1),
+(146, 1, 2, 1, 'aaa', '2018-11-02 20:40:22', 1),
+(147, 10, 2, 3, 'aaa', '2018-11-02 20:40:22', 1),
+(148, 0, 1, 1, 'teste', '2018-11-02 20:40:40', 1),
+(149, 2, 1, 3, 'teste', '2018-11-02 20:40:40', 1),
+(150, 0, 1, 1, 'teste', '2018-11-02 20:42:12', 1),
+(151, 2, 1, 3, 'teste', '2018-11-02 20:42:12', 1),
+(152, 1, 2, 1, 'teste', '2018-11-02 20:44:29', 1),
+(153, 1, 2, 1, 'testando', '2018-11-02 20:44:57', 1),
+(154, 1, 2, 1, 'testando', '2018-11-02 20:44:57', 1),
+(155, 10, 2, 3, 'testando', '2018-11-02 20:44:57', 1),
+(156, 1, 2, 1, 'interaÃ§Ã£o nova', '2018-11-02 20:45:20', 1),
+(157, 1, 2, 1, 'interaÃ§Ã£o nova', '2018-11-02 20:45:20', 1),
+(158, 10, 2, 3, 'interaÃ§Ã£o nova', '2018-11-02 20:45:20', 1),
+(159, 1, 2, 1, 'teste 1', '2018-11-02 20:46:22', 1),
+(160, 1, 2, 1, 'teste 1', '2018-11-02 20:46:22', 1),
+(161, 10, 2, 3, 'teste 1', '2018-11-02 20:46:22', 0);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `usuarios`
+-- Estrutura da tabela `usuarios`
 --
 
 CREATE TABLE `usuarios` (
@@ -182,74 +252,122 @@ CREATE TABLE `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Fazendo dump de dados para tabela `usuarios`
+-- Extraindo dados da tabela `usuarios`
 --
 
 INSERT INTO `usuarios` (`id`, `nome`, `senha`, `status`, `num_matricula`, `email`, `professor`) VALUES
 (1, 'Aluno', 'cc03e747a6afbbcbf8be7668acfebee5', 0, '11223344', 'aluno@aluno.com', 0),
 (2, 'Professor', 'cc03e747a6afbbcbf8be7668acfebee5', 0, '22334455', 'prof@prof.com', 1),
-(3, 'Aluno1', 'cc03e747a6afbbcbf8be7668acfebee5', 0, '8889900', 'aluno123@teste.com', 0),
-(4, 'Professor1', 'cc03e747a6afbbcbf8be7668acfebee5', 0, '555900', 'prof123@teste.com', 1),
-(15, 'Tchu', '74b87337454200d4d33f80c4663dc5e5', 0, 'aaa', 'davinv96@outlook.com', 1),
-(18, 'Testando a parada', 'cc03e747a6afbbcbf8be7668acfebee5', 0, '11220000', 'opa@opa.com', 0),
-(19, 'Jeca', '9dd6023e88f1e5bcf51415d2caa4e031', 0, '111113', 'jeca@jeca.com', 0);
+(15, 'Professor2', 'cc03e747a6afbbcbf8be7668acfebee5', 0, '1233444', 'prof2@prof2.com', 1),
+(20, 'Aluno1', 'cc03e747a6afbbcbf8be7668acfebee5', 0, '1233444', 'aluno1@aluno1.com', 0);
+
+-- --------------------------------------------------------
 
 --
--- Índices de tabelas apagadas
+-- Estrutura da tabela `usuarios_has_disciplina`
+--
+
+CREATE TABLE `usuarios_has_disciplina` (
+  `usuarios_id` int(11) NOT NULL,
+  `disciplina_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `usuarios_has_disciplina`
+--
+
+INSERT INTO `usuarios_has_disciplina` (`usuarios_id`, `disciplina_id`) VALUES
+(1, 1),
+(20, 1),
+(20, 4);
+
+--
+-- Indexes for dumped tables
 --
 
 --
--- Índices de tabela `admin`
+-- Indexes for table `admin`
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices de tabela `conversas`
+-- Indexes for table `conversas`
 --
 ALTER TABLE `conversas`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices de tabela `mensagens`
+-- Indexes for table `disciplina`
+--
+ALTER TABLE `disciplina`
+  ADD PRIMARY KEY (`id_disc`);
+
+--
+-- Indexes for table `mensagens`
 --
 ALTER TABLE `mensagens`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_conversa` (`id_conversa`);
 
 --
--- Índices de tabela `usuarios`
+-- Indexes for table `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT de tabelas apagadas
+-- Indexes for table `usuarios_has_disciplina`
+--
+ALTER TABLE `usuarios_has_disciplina`
+  ADD PRIMARY KEY (`usuarios_id`,`disciplina_id`),
+  ADD KEY `fk_usuarios_has_disciplina_disciplina1_idx` (`disciplina_id`),
+  ADD KEY `fk_usuarios_has_disciplina_usuarios1_idx` (`usuarios_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de tabela `admin`
+-- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT de tabela `conversas`
+-- AUTO_INCREMENT for table `conversas`
 --
 ALTER TABLE `conversas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
--- AUTO_INCREMENT de tabela `mensagens`
+-- AUTO_INCREMENT for table `disciplina`
+--
+ALTER TABLE `disciplina`
+  MODIFY `id_disc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `mensagens`
 --
 ALTER TABLE `mensagens`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=162;
 
 --
--- AUTO_INCREMENT de tabela `usuarios`
+-- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Limitadores para a tabela `usuarios_has_disciplina`
+--
+ALTER TABLE `usuarios_has_disciplina`
+  ADD CONSTRAINT `fk_usuarios_has_disciplina_disciplina1` FOREIGN KEY (`disciplina_id`) REFERENCES `disciplina` (`id_disc`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_usuarios_has_disciplina_usuarios1` FOREIGN KEY (`usuarios_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

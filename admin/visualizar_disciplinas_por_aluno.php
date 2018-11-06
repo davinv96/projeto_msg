@@ -30,7 +30,7 @@ $con = conectar();
 				</div>
 
 				<!-- Collect the nav links, forms, and other content for toggling -->
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
 						<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Usuários <span class="caret"></span></a>
@@ -67,44 +67,58 @@ $con = conectar();
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="http://localhost/projeto_msg/admin/logout.php">Sair <span class="glyphicon glyphicon-log-out"></span></a></li>
 					</ul>
-					</div><!-- /.navbar-collaps
+					</div><!-- /.navbar-collapse -->
 			</div><!-- /.container-fluid -->
 			</nav>
-		</body>
 
-		<table class="table">
-			<caption class="text-center"><b><h4>Lista dos Administradores</h4></b></caption>
-				<thead class="thead-dark">
-					<tr>
-						<th scope="col"> Nome</th>
-						<th scope="col"> Senha</th>
-						<th scope="col"> Email</th>
-						<th scope="col"> Editar</th>
-						<th scope="col"> Excluir</th>
+			<form name="vincula-disc" action="visualizar_disciplinas_por_aluno.php" method="POST">
+				<?php
+				$q = mysqli_query($con, "SELECT * FROM `usuarios` WHERE professor = 0");
+				while($row = mysqli_fetch_assoc($q)){
+					$array[] = $row;
 
+				}
 				
-					</tr>
-				</thead>
-					<?php
-						$q = mysqli_query($con, "SELECT * FROM `admin`");
-						
-						while($row = mysqli_fetch_assoc($q)){
-							$array[] = $row;
-						
-						}
-						foreach ($array as $row){
-							echo "<tr>";        
-							echo "<td>".$row['nome']."</td>";
-							echo "<td>********</td>";
-							echo "<td>".$row['email']."</td>";
-							
-							echo "<td><a href=http://localhost/projeto_msg/admin/editar_admin.php?id=".$row['id']."><span class='glyphicon glyphicon-edit'></span></a></td>";
-							echo "<td style='color:red'><a href=http://localhost/projeto_msg/admin/excluir_admin.php?id=".$row['id']."><span class='glyphicon glyphicon-remove'></span></a></td>";
-
-							echo "</tr>";
-					
-						}
-
 				?>
-        </table>
+				Aluno:
+				<select name="aluno">
+				
+				 <?php
+					foreach ($array as $row){
+						echo "<option value='{$row['id']}'>{$row['nome']}</option>";
+					}
+				  ?>
+				</select><br>
+				
+				<br>
+				
+  					
+ 				<button type="submit" class="btn btn-primary" name="visualizar">Visualizar</button>
+			</form>
+		</body>
 </html>
+<?php
+	if(isset($_POST['visualizar'])){
+ 		$id_aluno = $_POST["aluno"];
+		
+		
+		$q = mysqli_query($con, "SELECT * FROM `usuarios_has_disciplina` WHERE `usuarios_id` = '$id_aluno'");
+		if(mysqli_affected_rows($con)>0){
+			while($row = mysqli_fetch_assoc($q)){
+				$array[] = $row;
+				$q1 = mysqli_query($con, "SELECT * FROM `disciplina` WHERE `id_disc` =".$row['disciplina_id']."");
+					while($row = mysqli_fetch_assoc($q1)){
+						echo "Nome da disciplina: ".$row["nome_disc"]."<br>";
+					}
+							
+			}
+						
+		}else{				
+			echo "ALUNO SEM DISCIPLINAS VINCULADAS";
+
+		}
+		
+
+	}
+
+?>

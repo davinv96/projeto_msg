@@ -91,13 +91,9 @@ if(isset($_GET['id'])){
 			$mensagem = $row['mensagens'];
 			$timestamp = $row['timestamp'];
 			$lida = $row['lida'];
-			$q4 = mysqli_query($con, "SELECT `nome` FROM `usuarios` WHERE `id`='$id_usuario_destino'");
-				while($row = mysqli_fetch_assoc($q4)){
-					$nome_dest = $row['nome'];
-				}
+			
 			$body = "<tr>
 				<td>".$id_usuario_destino."</td>
-				<td>".$nome_dest."</td>
 				<td>".$mensagem."</td>
 				<td>".$timestamp."</td>";
 	
